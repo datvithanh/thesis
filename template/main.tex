@@ -1,0 +1,104 @@
+\documentclass[a4paper, 12pt, oneside]{report}
+\usepackage[left=3.50cm, right=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english, vietnamese]{babel}
+\usepackage[acronym, toc]{glossaries}
+\usepackage{fancybox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\graphicspath{{../figures/}}
+\usepackage[table]{xcolor}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage[nottoc]{tocbibind}
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage[backend=biber, sorting=none]{biblatex}
+\addbibresource{../bibliography.bib}
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
+
+\usepackage{url}
+%%% --- The following two lines are what needs to be added --- %%%
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{10pt}
+\setlength{\columnsep}{0.5125cm}
+\renewcommand{\baselinestretch}{1.2}
+
+\makeglossaries
+\input{acronyms}
+\input{glossary}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{tabu}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\usepackage{multirow}
+
+\usepackage{xpatch}
+\usepackage{tocloft}
+% \input{makelistofequations}
+
+\usepackage{fancyhdr}
+\fancypagestyle{IHA-fancy-style}{%
+  \fancyhf{}% Clear header and footer
+  \fancyhead[L]{\textit{This thesis is performed by: Nguyen Duc Minh - 20146488
+  - CN-CNTT2 - K59}}
+  \fancyfoot[R]{\thepage}% Custom footer
+  \renewcommand{\headrulewidth}{0.4pt}% Line at the header visible
+  \renewcommand{\footrulewidth}{0pt}% Line at the footer visible
+}
+% Redefine the plain page style
+\fancypagestyle{plain}{%
+  \fancyhf{}% Clear header and footer
+  \fancyhead[L]{\textit{This thesis is performed by: Nguyen Duc Minh - 20146488
+  - CN-CNTT2 - K59}}
+  \fancyfoot[R]{\thepage}% Custom footer
+  \renewcommand{\headrulewidth}{0.4pt}% Line at the header visible
+  \renewcommand{\footrulewidth}{0pt}% Line at the footer visible
+}
+\pagestyle{IHA-fancy-style}
+\setcounter{tocdepth}{1}
+\begin{document}
+\selectlanguage{english}
+\include{titlepage}
+\pagenumbering{roman}
+\include{requirements}
+\include{acknowledgement}
+\include{abstract-vi}
+\include{abstract-en}
+\include{summary}
+\pagenumbering{arabic}
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
+% \listofmyequations
+\printglossary[type=\acronymtype, nonumberlist]
+\printglossary[nonumberlist]
+\clearpage
+
+\include{chapter1}
+\include{chapter2}
+\include{chapter3}
+\include{chapter4}
+\include{conclusion}
+\printbibliography[heading=bibintoc]
+\end{document}

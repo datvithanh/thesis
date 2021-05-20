@@ -1,0 +1,299 @@
+\documentclass[a4paper, 13pt, oneside]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{comment}
+\usepackage[export]{adjustbox}
+\usepackage[utf8]{vietnam}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{fancybox}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{subfiles}
+\usepackage[left=3.50cm, right=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{changepage}
+\usepackage{framed}
+\usepackage{multirow}
+\usepackage{diagbox}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{tabu}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{setspace}
+% \usepackage[backend=biber, sorting=none]{biblatex}
+\usepackage{listings}
+\usepackage[nottoc]{tocbibind}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{pifont}
+% \usepackage{subfig}
+
+\usepackage{bm}
+\usepackage[acronym, nonumberlist, shortcuts, toc]{glossaries}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+\usepackage[nowatermark]{fixmetodonotes}
+
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{algorithmic}
+\SetAlFnt{\footnotesize}
+\SetKw{KwDownTo}{downto}
+\SetKw{KwTrue}{true}
+\SetKw{KwFalse}{false}
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKw{KwAnd}{and}
+\makeatletter
+\newcommand{\nosemic}{\renewcommand{\@endalgocfline}{\relax}}
+\newcommand{\dosemic}{\renewcommand{\@endalgocfline}{\algocf@endline}}
+\newcommand{\pushline}{\Indp}
+\newcommand{\popline}{\Indm\dosemic}
+\let\oldnl\nl
+\newcommand{\nonl}{\renewcommand{\nl}{\let\nl\oldnl}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\lstset{
+    language=Python,
+    numbers=left,
+    numberstyle=\small,
+    frame=single,
+    tabsize=2,
+    breaklines=true,
+    basicstyle=\ttfamily\small,
+    captionpos=b,
+    stringstyle=\color{magenta},
+    keywordstyle=\color{blue}\bfseries,
+    numberstyle=\color{black}
+}
+\setlength{\parskip}{0.6em}
+
+\makeatletter
+\newcommand{\vast}{\bBigg@{4}}
+\newcommand{\Vast}{\bBigg@{5}}
+\newcommand{\vastl}{\mathopen\vast}
+\newcommand{\vastm}{\mathrel\vast}
+\newcommand{\vastr}{\mathclose\vast}
+\newcommand{\Vastl}{\mathopen\Vast}
+\newcommand{\Vastm}{\mathrel\Vast}
+\newcommand{\Vastr}{\mathclose\Vast}
+\makeatother
+
+\renewcommand{\footrulewidth}{0.4pt}
+\newcommand{\bigCI}{\mathrel{\text{\scalebox{1.07}{$\perp\mkern-10mu\perp$}}}}
+\renewcommand{\baselinestretch}{1.2}
+
+% \setcounter{page}{3}
+\graphicspath{ {images/} }
+\lhead{}
+\chead{}
+\rhead{}
+
+\makeglossaries
+\loadglsentries[\acronymtype]{acronyms}
+\loadglsentries{glossary}
+
+% \setlength{\parindent}{1.25cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+\setlength{\columnsep}{0.5125cm}
+\renewcommand{\baselinestretch}{1.2}
+
+\fancypagestyle{IHA-fancy-style}{%
+  \fancyhf{}% Clear header and footer
+  \fancyhead[L]{\textit{This thesis is performed by: Vi Thanh Dat - 20164803 - CNTT2.02 - K61}}
+  \fancyfoot[R]{\thepage}% Custom footer
+  \renewcommand{\headrulewidth}{0.4pt}% Line at the header visible
+  \renewcommand{\footrulewidth}{0pt}% Line at the footer visible
+}
+% Redefine the plain page style
+\fancypagestyle{plain}{%
+  \fancyhf{}% Clear header and footer
+  \fancyhead[L]{\textit{This thesis is performed by: Vi Thanh Dat - 20164803 - CNTT2.02 - K61}}
+  \fancyfoot[R]{\thepage}% Custom footer
+  \renewcommand{\headrulewidth}{0.4pt}% Line at the header visible
+  \renewcommand{\footrulewidth}{0pt}% Line at the footer visible
+}
+\pagestyle{IHA-fancy-style}
+
+\begin{document}
+
+\begin{spacing}{1.25}
+    \thispagestyle{empty}
+    \thisfancypage{\setlength{\fboxrule}{1pt}\doublebox}{}
+    \begin{center}
+        {\fontsize{17}{20}\selectfont HANOI UNIVERSITY OF SCIENCE AND TECHNOLOGY} \\
+        {\fontsize{13}{17}\selectfont SCHOOL OF INFORMATION AND COMMUNICATION TECHNOLOGY} \\ [0.25cm]
+        \textbf{---------------*---------------} \\ [1cm]
+        \includegraphics[width=0.2\textwidth]{hust.jpeg} \\ [1cm]
+        {\fontsize{25}{30}\selectfont \textbf{GRADUATION THESIS}} \\ [0.25cm]
+        {\fontsize{14}{17}\selectfont SUBMITTED IN PARTIAL FULFILLMENT \\
+        OF THE REQUIREMENTS FOR THE DEGREE OF} \\ [0.5cm]
+        {\fontsize{25}{30}\selectfont \textbf{ENGINEER}} \\ [0.5cm]
+        {\fontsize{14}{17}\selectfont IN} \\ [0.5cm]
+        {\fontsize{22}{26}\selectfont INFORMATION TECHNOLOGY} \\ [0.5cm]
+        {\fontsize{15}{15}\selectfont \textbf{\TODO{TITLE}}}
+        \\ [2.25cm]
+        \begin{tabular}{ l l }
+            Author & : \textbf{Vi Thanh Dat} \\
+            Class & : CNTT2.02 K61 \\
+            Student ID & : 20164803 \\ [0.5cm]
+            Supervisor & : \TODO{supervisor}
+        \end{tabular} \\ [2.25cm]
+        {\fontsize{17}{20}\selectfont HANOI, 5 - 2021}
+    \end{center}
+\end{spacing}
+\pagebreak
+
+\selectlanguage{english}
+\fontsize{13pt}{16pt}
+\selectfont
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+% \begin{spacing}{1.0}
+%     \chapter*{Requirements for the Thesis}
+%     \section*{Student Information}
+%     \begin{itemize}
+%         \begin{multicols}{2}
+%         \item \textbf{Full name:} VI THANH DAT
+%         \item \textbf{Class:} CNTT2.02 K61
+%         \item \textbf{Tel:} +84336 863 831
+%         \item \textbf{Email:} dat.vt164803@sis.hust.edu.vn
+%         \item \textbf{Program:} Full-time engineer
+%         \end{multicols}
+%         \item \textbf{This thesis is conducted at:} Hanoi University of Science and Technology
+%         \item \textbf{Duration:} from 22/01/2021 to
+%         24/05/2021
+%     \end{itemize}
+%     \section*{Objective of the Thesis}
+%         Apply deep learning and metric learning to speaker verification in Vietnamese.
+%     \section*{Main Tasks of the Thesis}
+%         \begin{itemize}
+%             \item Study different approaches for speaker verification.
+%             \item Study deep learning models and metric learning.
+%             \item Apply and improve multi-similarity loss for speaker verification.
+%             \item Prepare data, train, and evaluate deep learning models.
+%         \end{itemize}
+    
+%     \section*{The reassurance of student}
+%     I, Vi Thanh Dat, guarantee that this thesis is my own efforts under the guidance of \textit{thay tuan anh} and \textit{co trang}. \\
+%     All results presented in this thesis are truthful and are not copies of any other works.
+%     \begin{minipage}{0.5\textwidth}
+%         \hfill
+%     \end{minipage}
+%     \begin{minipage}[t]{0.5\textwidth}
+%         \begin{center}
+%         \textit{Hanoi, 1st May, 2021\\Author\\[2.5cm]Vi Thanh Dat}
+%         \end{center}
+%     \end{minipage}
+%     \subsection*{Confirmation of supervisors on the fulfillment of requirements and allowance of defense:}
+%     \dotfill\\.\dotfill\\.\dotfill\\.\dotfill\\\\
+%     \begin{minipage}{0.5\textwidth}
+%         \hfill
+%     \end{minipage}
+%     \begin{minipage}[t]{0.5\textwidth}
+%         \begin{center}
+%     \textit{Hanoi, 1st May, 2021\\Supervisor\\[2.5cm]Dr. Nguyen Thi Thu Trang}
+%         \end{center}
+%     \end{minipage}
+% \end{spacing}
+
+% \chapter*{Acknowledgments}
+
+
+\pagebreak
+
+\chapter*{Abstract}
+Placeholder
+
+\chapter*{Tóm tắt}
+Placeholder
+
+\chapter*{Summary}
+The thesis is divided into 5 chapters:
+\begin{itemize}
+    \item Chapter 1 describes the problem of training neural networks at scale, as well as the object detection problem that would be used as a case study.
+    \item Chapter 2 presents the theoretical background as well as related works, including machine learning, object detection and distributed training.
+    \item Chapter 3 details the design and implementation of BK.Synapse - the proposed framework - and a case study where it is applied to an object detection problem.
+    \item Chapter 4 reports on the results of several experiments and benchmarks.
+    \item Chapter 5 presents our conclusions and lays out plans for future works.
+\end{itemize}
+
+\pagebreak
+\pagenumbering{gobble}
+\tableofcontents
+\pagebreak
+\pagenumbering{arabic}
+\listoffigures
+\listoftables
+
+% \addcontentsline{toc}{chapter}{List of Abbreviations}
+\printglossary[type=\acronymtype,style=long, title=List of Abbreviations]
+% \addcontentsline{toc}{chapter}{Glossary}
+\printglossary
+\pagebreak
+\setcounter{page}{1}
+
+\subfile{introduction.tex}
+\subfile{preliminaries.tex}
+\subfile{propose.tex}
+\subfile{results.tex}
+
+\chapter{Conclusions}
+.
+
+\pagebreak
+\bibliographystyle{plain}
+\bibliography{mybib}
+\subfile{appendix.tex}
+\end{document}
+
+% 2 chương cho Propose: 
+% - optimize VoxCeleb
+% - SV for low resource languages
+% -> ko cần build large language corpus như thế nhưng vẫn
+
+% 1. Introduction
+% 2. Background (~10-15 trang)
+% 3. Optimize dataset VoxCeleb ()
+% - Trình bày baseline
+% - Phương pháp 
+% - Có experiment luôn
+
+% 4. Proposal low resource language
+% - Lấy cái baseline từ chương 3, however 
+
+% Thực nghiệm: 
+% - Baseline pretrained trên tiếng Việt
+% - train chung tiếng việt với VoxCeleb
+% - Trước và sau enhance
+% - train từ đầu bằng tiếng Việt
+% - Finetune với tiếng việt
+% - Finetune với tiếng Việt + loss
+
+
+% 3 & 4 trình bày như paper: intro, method, experiments (có link đến low resource languages)
+
+% 5. Experiment and evaluation ()
