@@ -130,15 +130,22 @@ Các thực nghiệm trong mục tiếp theo đều được chạy trên cùng 
 Để thực hiện huấn luyện các mô hình, tác giả sử dụng Google Colaboratory: Hệ điều hành Ubuntu 18.04, 2vCPU Intel Xeon 2.2 Ghz, RAM 25GB, GPU Tesla T4 15GB.
 
 \section{Kết quả thực nghiệm và đánh giá}
-Trong phần này tác giả sử dụng tỉ lệ lỗi bằng nhau (Equal error rate - EER) để đánh giá hiệu năng của các mô hình thực nghiệm. EER là điểm nằm trên đường ROC mà có tỉ lệ dương tính giả (ví dụ bình thường được coi là bất thường) và tỉ lệ âm tính giả (ví dụ bất thường được xem là bình thường). Hệ thống nhận dạng càng tốt thì có EER càng nhỏ.
+Trong phần này tác giả sử dụng tỉ lệ lỗi bằng nhau (Equal error rate - EER) để đánh giá hiệu năng của các mô hình thực nghiệm. EER là điểm nằm cắt nhau giữa đường tỉ lệ chấp nhận giả (False acceptance rate - FAR, tỉ lệ mà người xâm nhập được coi là người dùng hợp lệ) và đường tỉ từ chối giả (False rejection rate - FRR, tỉ lệ mà người dùng hợp lệ bị từ chối) khi điều chỉnh ngưỡng (Hình \ref{fig:eer}). Mô hình nhận dạng người nói càng hiệu quả thì có EER càng nhỏ.
 
-Tác giả thực hiện nhiều trường hợp thực nghiệm khác nhau với mục tiêu huấn luyện mô hình nhận dạng người nói một cách có hiệu quả trên tiếng Việt. . Thực nghiệm 5 kiểm tra tính hiệu quả của hàm mất mát AP với margin khác nhau. Mặc định, các thông số \TODO{...}:
-\begin{itemize}
-  \item Các mô hình được finetune từ mô hình train sẵn trong \cite{}.
-\end{itemize}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/eer.jpg}
+  \caption{Mô tả EER \protect\footnotemark}
+  \label{fig:eer}
+\end{figure}
+\footnotetext{https://wentzwu.com/2019/05/05/which-is-more-important-accuracy-or-acceptability/}
+
+Có tổng cộng 1626 đoạn âm thanh của 59 người nói trong tập kiểm thử, các cặp câu hợp lệ và câu không hợp lệ được sinh ra từ mọi cặp câu có thể. Hệ thống tính điểm cho một cặp câu bằng việc tính độ tương đồng cô-sin của biểu diễn của 2 đoạn. Hai câu nói của cùng một người nói được coi là hợp lệ; hai câu nói từ 2 người nói khác nhau được coi là câu nói không hợp lệ. Với một ngưỡng cho trước, nếu cặp điểm câu nói hợp lệ dưới ngưỡng này (độ tương đồng thấp), câu nói đó được tính vào tỉ lệ từ chối giả. Ngược lại, nếu một cặp câu nói không hợp lệ có điểm nằm trên ngưỡng (tỉ lệ tương đồng cao), câu nói được tính vào tỉ lệ chấp nhận giả.
+
+Tác giả thực hiện nhiều trường hợp thực nghiệm khác nhau với mục tiêu huấn luyện mô hình nhận dạng người nói một cách hiệu quả trên tiếng Việt. Thực nghiệm 1 đánh giá hiệu quả của việc làm sạch dữ liệu như mô tả bên trên. Thực nghiệm 2 khảo sát các cách huấn luyện khác nhau so với transfer learning. Thực nghiệm 3 đánh giá hiệu quả trong việc khử nhiễu âm thanh trong. Thực nghiệm 4 so sánh mô hình khi sử dụng phương thức tối ưu Adam và SGD. Thực nghiệm 5 kiểm tra tính hiệu quả của hàm mất mát AMP-cos và AMP-arc với các giá trị hệ số phạt khác nhau.
 
 \subsubsection{Thực nghiệm 1: làm sạch dữ liệu}
-Bảng \ref*{tab:experiment-clean} mô tả kết quả thực nghiệm với dữ liệu ban đầu và dữ liệu đã được sàng học như đã trình bày trong \ref*{noise-removal}. Như có thể thấy, kết quả huấn luyện trên tập đã sàng lọc cải thiện 0.93\% EER so với dữ liệu gốc. Do vậy, các thực nghiệm về sau sẽ sử dụng bộ dữ liệu đã qua sàng lọc.
+Bảng \ref*{tab:experiment-clean} mô tả kết quả thực nghiệm với dữ liệu ban đầu và dữ liệu đã được sàng lọc như đã trình bày trong \ref*{noise-removal}. Như có thể thấy, kết quả huấn luyện trên tập đã sàng lọc cải thiện 0.93\% EER so với dữ liệu gốc. Do vậy, các thực nghiệm về sau sẽ sử dụng bộ dữ liệu đã qua sàng lọc.
 
 \begin{table}[h]
   \centering
@@ -150,46 +157,51 @@ Bảng \ref*{tab:experiment-clean} mô tả kết quả thực nghiệm với d�
     Cải thiện chất lượng & 5.860\% \\
     \hline
   \end{tabular}
-  \caption{placeholder}
+  \caption{EER trên tập kiểm tra với dữ liệu trước và sau khi cải thiện chất lượng}
   \label{tab:experiment-clean}
 \end{table}
 
 \subsubsection{Thực nghiệm 2: Phương thức huấn luyện}
-Trong thực nghiệm này, tác giả tiến hành khảo sát các phương thức huấn luyện mô hình. Bảng \cite{tab:experiment-training} mô tả kết quả với các trường hợp khác nhau. Do số người nói trong bộ dữ liệu tiếng Việt ít hơn hẳn so với người nói tiếng Anh trong bộ dữ liệu VoxCeleb, huấn luyện không tập trung đủ để tìm ra các điểm hữu dụng phân biệt người nói tiếng Việt, dẫn đến mô hình huấn luyện từ đầu kết hợp hai bộ dữ liệu đạt kết quả tệ hơn. Có thể thấy finetune bằng riêng dữ liệu tiếng Việt cho kết quả vượt trội so với huấn luyện từ đầu bằng bộ dữ liệu tiếng Việt hoặc kết hợp VoxCeleb (dữ liệu tiếng Anh) với EER 4.775\%. Các thử nghiệm phía sau sử dụng phương pháp finetune.
+Trong thực nghiệm này, tác giả tiến hành khảo sát các phương thức huấn luyện mô hình. Bảng \ref{tab:experiment-training} mô tả kết quả với các trường hợp khác nhau bao gồm: mô hình huấn luyện sẵn \cite{heo2020clova}, huấn luyện từ đầu trên dữ liệu tiếng Anh và tiếng Việt, huấn luyện từ đầu chỉ trên dữ liệu tiếng Việt, transfer learning trên dữ liệu tiếng Việt. 
+
+Do số người nói trong bộ dữ liệu tiếng Việt ít hơn hẳn so với người nói tiếng Anh trong bộ dữ liệu VoxCeleb, huấn luyện không tập trung đủ để tìm ra các đặc trưng hữu ích để phân biệt người nói tiếng Việt, dẫn đến mô hình huấn luyện từ đầu kết hợp hai bộ dữ liệu đạt kết quả tệ hơn. Mô hình cơ sở (mô tả trong phần \ref{baseline}) huấn luyện từ đầu trên dữ liệu tiếng Việt đạt kết quả 5.860\% EER. Có thể thấy finetune bằng riêng dữ liệu tiếng Việt cho kết quả vượt trội so với huấn luyện từ đầu bằng bộ dữ liệu tiếng Việt hoặc kết hợp VoxCeleb (dữ liệu tiếng Anh) với EER 4.775\%. Kết quả cho thấy các đặc trưng người nói trong tiếng anh góp phần cải thiện mô hình tiếng Việt. Các thử nghiệm phía sau sử dụng phương pháp transfer learning trên bộ dữ liệu tiếng Việt.
 
 \begin{table}[h]
   \centering
-  \begin{tabular}{|l|r|}
+  \begin{tabular}{|l|l|r|}
     \hline
-    \textbf{Phương pháp}& \textbf{EER trên tập kiểm tra}\\
+    \textbf{Phương pháp huấn luyện} & \textbf{Dữ liệu huấn luyện} & \textbf{EER trên tập kiểm tra}\\
     \hline
-    Pretrain & 10.60\% \\
-    Scratch + vn data + VoxCeleb & 6.294\% \\
-    Scratch + vn data & 5.860\% \\
-    Finetune & \textbf{4.775\%} \\
+    Pretrain & - & 10.60\% \\
+    Huấn luyện từ đầu & Tiếng Việt \& VoxCeleb & 6.294\% \\
+    Huấn luyện từ đầu & Tiếng Việt & 5.860\% \\
+    Transfer learning & Tiếng Việt & \textbf{4.775\%} \\
     \hline
   \end{tabular}
-  \caption{placeholder}
+  \caption{EER trên tập kiểm tra với các phương pháp huấn luyện và dữ liệu khác nhau}
   \label{tab:experiment-training}
 \end{table}
+\TODO{name vietnamese dataset for ease in reference}
 
-\subsubsection{Thực nghiệm 3: Khử nhiễu đầu vào}
+\subsubsection{Thực nghiệm 3: Khử tạp âm trong tín hiệu giọng nói}
+Do chỉ có VIVOS là được thu thập từ phòng thu âm, tín hiệu giọng nói trong tập dữ liệu còn chứa nhiều tạp âm, ví dụ nhạc nền, tiếng ồn nhỏ xung quanh, âm thanh đường phố xe cộ. Các nhiễu tạp âm có khả năng cản trở mô hình học được chất giọng cần học từ dữ liệu. Do đó, tác giả sử dụng dữ liệu khử tạp âm dùng mô hình do bộ phận nghiên cứu trí tuệ nhân tạo tại Facebook phát triển \cite{defossez2020real} và đánh giá hiệu quả trong thực nghiệm này. Bảng \ref*{tab:experiment-denoising} cho thấy việc khử tạp âm có hiệu quả cao với 0.560\% EER cải thiện trên tập kiểm tra. Do vậy, trong các thực nghiệm tiếp theo, các mô hình được huấn luyện trên dữ liệu đã lọc tạp âm.
 
 \begin{table}[h]
   \centering
   \begin{tabular}{|l|r|}
     \hline
-    \textbf{Dữ liệu}& \textbf{EER trên tập kiểm tra}\\
+    \textbf{Dữ liệu huấn luyện}& \textbf{EER trên tập kiểm tra}\\
     \hline
-    Nhiễu âm thanh & 4.775\% \\
-    Khử nhiễu âm thanh & \textbf{4.215\%} \\
+    Chứa tạp âm & 4.775\% \\
+    Khử tạp âm & \textbf{4.215\%} \\
     \hline
   \end{tabular}
-  \caption{placeholder}
+  \caption{EER trên tập kiểm tra của mô hình huấn luyện với dữ liệu còn nhiễu âm thanh và đã khử tạp âm}
   \label{tab:experiment-denoising}
 \end{table}
 
-\subsubsection{Thực nghiệm 4: Hàm tối ưu}
+\subsubsection{Thực nghiệm 4: Phương pháp tối ưu}
+
 
 \begin{table}[h]
   \centering
@@ -197,11 +209,11 @@ Trong thực nghiệm này, tác giả tiến hành khảo sát các phương th
     \hline
     \textbf{Dữ liệu}& \textbf{EER trên tập kiểm tra}\\
     \hline
-    ADAM & 4.215\% \\
+    Adam & 4.215\% \\
     SGD & \textbf{2.930\%} \\
     \hline
   \end{tabular}
-  \caption{placeholder}
+  \caption{EER trên tập kiểm tra của mô hình huấn luyện với Adam và SGD}
   \label{tab:experiment-optimizer}
 \end{table}
 
@@ -211,17 +223,22 @@ Trong thực nghiệm này, tác giả tiến hành khảo sát các phương th
   \centering
   \begin{tabular}{|l|r|}
     \hline
-    \textbf{hmm}& \textbf{EER trên tập kiểm tra}\\
+    \textbf{Hàm mất mát}& \textbf{EER trên tập kiểm tra}\\
     \hline
     AP & 2.930\% \\
-    AP (m=0.1) & 2.789\% \\ 
-    AP (m=0.2) & \textbf{2.749\%} \\
-    AP (m=0.3) & 2.754\% \\
-    AP (m=0.4) & 2.804\%\\
-    AP (m=0.5) & 2.892\%\\
+    AMP-cos (m=0.1) & 2.789\% \\ 
+    AMP-cos (m=0.2) & 2.749\% \\
+    AMP-cos (m=0.3) & 2.754\% \\
+    AMP-cos (m=0.4) & 2.804\%\\
+    AMP-cos (m=0.5) & 2.892\%\\
+    AMP-arc (m=0.1) & 2.782\% \\ 
+    AMP-arc (m=0.2) & \textbf{2.698\%} \\
+    AMP-arc (m=0.3) & 2.791\% \\
+    AMP-arc (m=0.4) & 2.790\%\\
+    AMP-arc (m=0.5) & 2.799\%\\
     \hline
   \end{tabular}
-  \caption{placeholder}
+  \caption{EER trên tập kiểm tra của mô hình huấn luyện với hàm mất mát AP, AMP-cos và AMP-arc với các giá trị phạt khác nhau}
   \label{tab:experiment-loss}
 \end{table}
 

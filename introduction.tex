@@ -1,6 +1,6 @@
 \documentclass[thesis.tex]{subfiles}
 
-\chapter{Giới thiệu về bài toán nhận dạng người nói}
+\chapter{Giới thiệu về nhận dạng người nói}
 
 Trong chương này, tác giả giới thiệu tổng quan về bài toán nhận dạng người nói, điểm qua các nghiên cứu liên quan và giới thiệu về bài toán trong đồ án.
 
@@ -25,7 +25,7 @@ Dựa vào ứng dụng, nhận dạng người được phân loại thành nh�
     \label{fig:verification-identification}
 \end{figure}
 
-Như mô tả trong hình \ref{fig:overall-system}, có ba pha trong quá trình nhận dạng người nói:
+Thông thường, hệ thống nhận dạng người nói được chia thành 3 pha như mô tả trong Hình \ref*{fig:overall-system}
 
 \begin{itemize}
     \item Pha 1: phát triển (development). Trong pha này, mô hình có khả năng biểu diễn đặc trưng người nói được huấn luyện và tối ưu trên một cơ sở dữ liệu các đoạn tiếng nói.
@@ -50,61 +50,10 @@ Trong thực tế, hiệu năng của hệ thống nhận diện người nói b
     \item Các kênh truyền như các loại điện thoại di động khác nhau, micrô, giao thức truyền âm thanh qua internet có thể làm thay đổi giọng nói.
 \end{itemize}
 
-Các phương pháp truyền thống sử dụng Gaussian Mixture Model \TODO{Đoạn này viết về dominated traditional approaches to overcome channel/session variabilities JFA, NAP, WCCN, LDA, PLDA}
-
 Dựa vào sự tương đồng của các câu nói đầu vào, phương pháp giải quyết bài toán nhận dạng người nói còn có thể chia thành nhóm dựa vào văn bản (text-dependent speaker recognition - TDSR) và nhóm không dựa vào văn bản(text-independent speaker recognition - TISR). Các hệ thống TDSR yêu cầu người nói cung cấp các đoạn tiếng nói có nội dung theo một từ hoặc câu được định sẵn; nội dung các câu nói phải được giữ nhất quán trong cả quá trình huấn luyện và nhận dạng. Ngược lại, TISR không yêu cầu người dùng phải thu theo bất cứ một văn bản nào. Với các đoạn tiếng nói ngắn, các hệ thống TDSR đã có thể đạt được hiệu suất nhận diện cao, trong khi các TISR yêu cầu các câu nói dài để huấn luyện các mô hình đáng tin cậy và đạt được hiệu suất tốt. Do sự bất tiện của các hệ thống TDSR, trong vài năm gần đây, cộng đồng nghiên cứu tập trung phát triển các mô hình học sâu end-to-end nhằm mục đích biểu diễn các đoạn tiếng nói ngắn.
 
-\section{Các nghiên cứu học sâu giải quyết bài toán nhận diện giọng nói}
-\label{related-works}
+\section{Nhận dạng người nói trong tiếng Việt}
 
-Các mô hình học sâu end-to-end hiện đại cho bài toán nhận diện giọng nói thường gồm ba phần chính (\ref{fig:model-architecture}):
+\section{Mục tiêu và phạm vi đồ án}
 
-\begin{itemize}
-    \item Một mạng nơ-ron làm công cụ trích xuất biểu diễn người nói cho một khung đặc trưng tiếng nói.
-    \item Lớp tổng hợp dữ liệu: lớp này sử dụng biểu diễn của các khung âm thanh từ mạng nơ-ron để tổng hợp ra một vec-tơ duy nhất đại diện cho đoạn tiếng nói đầu vào.
-    \item Một hàm mất mát để tối ưu toàn bộ hệ thống.
-\end{itemize}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/x-vector.png}
-    \caption{Tổng quan hệ thống nhận diện người nói \cite{snyder2018x}}
-    \label{fig:model-architecture}
-\end{figure}
-
-Trong pha kiểm tra, mạng nơ-ron và lớp tổng hợp dữ liệu được sử dụng để tạo ra vec-tơ biểu diễn của đoạn tiếng nói kiểm tra. Hàm mất mát chỉ được sử dụng trong pha phát triển, và bị loại bỏ trong pha kiểm tra và pha ghi danh.
-
-Phần lớn các nghiên cứu về nhận dạng người nói hướng tới cải thiện hệ thống qua nâng cao hiệu quả của lớp tổng hợp dữ liệu và hàm mất mát. Về mạng nơ-ron trích xuất đặc trưng, các nghiên cứu chủ yêu sử dụng các mạng xương sống thành công trong các bài toán khác như phân loại hình ảnh (Ví dụ: mạng VGG \cite{simonyan2014very} và mạng ResNet \cite{he2016deep}) và nhận dạng tiếng nói (mạng TDNN \cite{waibel1989phoneme} và mạng LSTM \cite{hochreiter1997long}). 
-
-Một vài nghiên cứu nổi bật cho lớp tổng hợp có thể kể đến như: tổng hợp trung bình (average pooling) \cite{variani2014deep}, tổng hợp thống kê (statistical pooling) \cite{snyder2018x}, tổng hợp dựa trên cơ chế tập trung (attentive pooling) \cite{zhu2018self,okabe2018attentive}, hay mã hoá dựa trên từ điển NetVLAD/GhostVLAD trong \cite{xie2019utterance}.
-
-Các nghiên cứu tiên phong \cite{variani2014deep, nagrani2017voxceleb, snyder2018x, snyder2017deep} ứng dụng mạng nơ-ron nhận tạo vào bài toán nhận dạng người nói học không gian biểu diễn bằng các hàm mất mát phân loại (classification loss). Trên cơ sở đó, các nghiên cứu thịnh hành \cite{okabe2018attentive, snyder2019speaker, ravanelli2018speaker} sử dụng hàm softmax để huấn luyện mô hình. Hàm softmax có khả năng học để phân loại người nói một cách hiêu quả, tuy nhiên, nó không được thiết kế để tối ưu tính tương đồng trong không gian embedding. 
-
-Để giải quyết điểm yếu của softmax, công trình của Liu và cộng sự \cite{liu2017sphereface} đề xuất hàm angular softmax (A-Softmax) cho bài toán nhận diện khuôn mặt bằng cách dùng độ tương đồng cô-sin làm đầu vào của hàm softmax. Các nghiên cứu sau đó áp dụng hàm A-Softmax trên bài toán nhận dạng người nói \cite{villalba2019state, snyder2019jhu} cho thấy sự vượt trội của hàm này so với softmax thông thường. Các phiên bản cải tiến của hàm A-Softmax như AM-Softmax \cite{wang2018additive} và AAM-Softmax \cite{deng2019arcface} sử dụng hàm phạt biên trở nên phổ biến cho bài toán nhận dạng người nói do dễ dàng cài đặt và hiệu năng cao. Tuy nhiên, huấn luyện mô hình với AM-Softmax và AAM-Softmax khá khó khăn do hai hàm này rất nhạy cảm với sự điều chỉnh tham số.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.9\textwidth]{images/metric-learning.jpg}
-    \caption{Không gian embedding với học biểu diễn\cite{wang2019metric}}
-    \label{fig:metric-learning}
-\end{figure}
-
-Bên cạnh nhóm hàm mục tiêu phân loại, học biểu diễn (Representation learning hay Metric learning) cũng là lựa chọn phổ biến cho bài toán nhận dạng người nói. Thay vì phân loại, mục tiêu của học biểu diễn là tối ưu không gian embedding \ref{fig:metric-learning}. Trong bài toán nhận dạng người nói, biểu diễn của các câu nói từ cùng một người được kéo lại gần nhau trong không gian embedding, ngược lại câu của những người khác nhau bị đẩy ra xa. 
-
-Hai hàm học biểu diễn nổi tiếng là contrastive loss \cite{chopra2005learning} và triplet loss \cite{schroff2015facenet} xuất phát từ bài toán nhận diện khuôn mặt cho kết quả hứa hẹn trong bài toán nhận diện người nói \cite{zhang2018text,rahman2018attention}. Năm 2020, Chung và cộng sự \cite{chung2020defence} đề xuất hàm Angular Prototypical cho kết quả vượt trội khi so với các hàm mục tiêu phân loại. 
-
-\section{Ngôn ngữ tài nguyên thấp}
-Ngôn ngữ tài nguyên thấp có thể hiểu là các ngôn ngữ
-
-% - Speaker verification \\
-% - - Industries, Applications \\ 
-% - Speaker verification settings \\ 
-% - - Text independent SV \\ 
-% - - Text dependent SV \\ 
-% - Related works SV \\ 
-% - - Traditional \\ 
-% - - deep neural networks \\ 
-% - - deep metric learning \\ 
-% - Speech processing in low resource languages \\ 
-% - - ASR (?) \\ 
-% - - SV with few identity data  \\
+\section{Bố cục đồ án}

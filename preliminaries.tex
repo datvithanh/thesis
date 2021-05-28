@@ -1,7 +1,7 @@
 \documentclass[thesis.tex]{subfiles}
 
 \chapter{Cơ sở lý thuyết}
-Chương 2 trình bày cơ sở lý thuyết về học máy, học sâu cùng \TODO{...}.
+Chương 2 trình bày cơ sở lý thuyết về học máy và học sâu. Trong chương này, tác giả trình bày về các hàm mất mát phân loại phổ biến và phương pháp trích xuất đặc trưng từ tín hiệu âm thanh. Đây là nền tảng để xây dựng mô hình trong chương 3.
 
 \section{Học máy}
 
@@ -21,7 +21,7 @@ Trong \textbf{học không giám sát}, khác với học có giám sát, ta ch�
 
 Hệ thống \textbf{học củng cố} được xem như là một tác tử trong một môi trường vô định và phức tạp. Với mỗi hành động, tác tử này nhận điểm thưởng hoặc phạt từ môi trường. Mục tiêu của học củng cố là các tác tử thông minh để tối đa điểm thưởng và thực hiện tác vụ của nó. Học củng cố hiện đang là lĩnh vực nghiên cứu tập trung nhiều nguồn lực và công sức với nhiều ứng dụng thực tế liên quan tới điều khiển robot hay vận hành nhà máy một cách tự động.
 
-\subsection{Mạng nơ-ron nhân tạo}
+\subsection{Mạng nơ-ron nhân tạo}\label{ann}
 Mạng nơ-ron nhân tạo (Artificial neural networks - ANN) là một mô hình tính toán mô phỏng cách nơ-ron trong não người phân tích và xử lý thông tin. Học sâu với nền tảng là ANN cho phép xử lý dữ liệu và thông tin với độ chính xác vượt xa các mô hình xác suất cổ điển và tốc độ vượt trội so với con người. 
 
 \begin{figure}[h]
@@ -60,7 +60,7 @@ Có rất nhiều hàm kích hoạt khác nhau, ví dụ như hàm ReLU, hàm si
 
 Quá trình lần lượt tính toán mạng nơ-ron từ lớp đầu vào, tới lớp ẩn và cuối cùng là lớp đầu ra được gọi là quá trình lan truyền tiến (feedforward). 
 
-Mạng nơ-ron học từ quá trình đối nghịch với lan truyền tiến gọi là lan truyền ngược (backpropagation). Với vec-tơ đặc trung đầu vào $\bm{x}$ với nhãn tương ứng $y$, đầu tiên ta tính giá trị của nơ-ron lớp đầu ra $\bm{a}^{L-1}$ bằng quá trình lan truyền tiến. Sau đó, ta "lan truyền" sai khác giữa $\bm{a}^{L-1}$ và $y$ tới toàn mạng để điều chỉnh các bộ tham số $\bm{W}^i$ và $\bm{b}^i$ với mục tiêu để giảm sai khác này.
+Mạng nơ-ron học từ quá trình đối nghịch với lan truyền tiến gọi là lan truyền ngược (backpropagation). Với vec-tơ đặc trung đầu vào $\bm{x}$ với nhãn tương ứng $y$, đầu tiên ta tính giá trị của nơ-ron lớp đầu ra $\bm{a}^{L-1}$ bằng quá trình lan truyền tiến. Sau đó, ta "lan truyền" sai khác giữa $\bm{a}^{L-1}$ và $y$ tới toàn mạng để điều chỉnh các bộ trọng số $\bm{W}^i$ và $\bm{b}^i$ với mục tiêu để giảm sai khác này.
 
 Để đo đạc sự sai khác trong đầu ra của mạng và nhãn đầu vào, ta sử dụng một hàm mất mát. Dựa vào tác vụ khác nhau của bài toán ta cần sử dụng các hàm mất mát khác nhau. Thông thường, bài toán hồi quy sử dụng hàm trung bình bình phương sai số (mean square error - MSE), còn bài toán phân loại sử dụng hàm entropy chéo (cross entropy - CE). Với tập dữ liệu $D = \{(\bm{x}_1, y_1), ..., (\bm{x}_N, y_N)\}$, giả sử lớp cuối cùng của mạng có một nơ-ron, gọi $a^{L-1}_i$ là giá trị của nơ-ron đầu ra tương ứng với dữ liệu đầu vào $\bm{x}_i$. Hàm mất mát MSE được tính như sau:
 
@@ -70,13 +70,13 @@ Mạng nơ-ron học từ quá trình đối nghịch với lan truyền tiến 
 
 hàm CE được tính theo công thức:
 
-\begin{equation}
+\begin{equation}\label{eq:ce}
   CE = -\dfrac{1}{N} \sum_{i=1}^N a^{L-1}_i log(y_i)
 \end{equation}
 
-Để điều chỉnh các tham số, ta cần phải biết giá trị cập nhật cho mỗi tham số. Dựa trên giá trị mất mát, các tín hiệu mất mát của nơ-ron trong lớp thứ $i$ được tính toán dựa trên lỗi mà lớp thứ $i+1$ gây ra. Tín hiệu mất mát này được lan truyền từ lớp đầu ra về tới lớp đầu vào, sau đó thực hiện cập nhật các tham số $\bm{W}, \bm{b}$ nhằm giảm các giá trị lỗi. Các giá trị lỗi của các bộ tham số được gọi là gradient. 
+Để điều chỉnh các trọng số, ta cần phải biết giá trị cập nhật cho mỗi trọng số. Dựa trên giá trị mất mát, các tín hiệu mất mát của nơ-ron trong lớp thứ $i$ được tính toán dựa trên lỗi mà lớp thứ $i+1$ gây ra. Tín hiệu mất mát này được lan truyền từ lớp đầu ra về tới lớp đầu vào, sau đó thực hiện cập nhật các trọng số $\bm{W}, \bm{b}$ nhằm giảm các giá trị lỗi. Các giá trị lỗi của các bộ trọng số được gọi là gradient. 
 
-Sau khi có bộ gradient, ta có thể cập nhật mạng bằng cách đi ngược lại với hướng của gradient. Giá trị mất mát trên bộ dữ liệu sẽ giảm nếu gradient được cập nhật với bước đủ nhỏ. Bằng cách lặp đi lặp lại quá trình lan truyền tiến, lan truyền ngược và cập nhật tham số bằng gradient, bộ tham số có thể hội tụ tại một điểm cực tiểu của hàm mất mát. Phương pháp tối ưu lặp này được gọi là gradient descent (Hình \ref*{fig:gradient-descent}).
+Sau khi có bộ gradient, ta có thể cập nhật mạng bằng cách đi ngược lại với hướng của gradient. Giá trị mất mát trên bộ dữ liệu sẽ giảm nếu gradient được cập nhật với bước đủ nhỏ. Bằng cách lặp đi lặp lại quá trình lan truyền tiến, lan truyền ngược và cập nhật trọng số bằng gradient, bộ trọng số có thể hội tụ tại một điểm cực tiểu của hàm mất mát. Phương pháp tối ưu lặp này được gọi là gradient descent (Hình \ref*{fig:gradient-descent}).
 
 \begin{figure}[h]
   \centering
@@ -96,7 +96,7 @@ Học sâu là một lớp các mô hình học máy được xây dựng dựa 
 
 \subsection{Mạng nơ-ron tích chập}
 
-Mạng nơ-ron tích chập (Convolutional neural networks), hay mạng tích chập, được đề xuất lần đầu vào năm 1989 bởi Yan LeCun \cite{lecun1989backpropagation} để giải quyết bài toán nhận dạng chữ viết tay. Mạng tích chập được thiết kế với mục tiêu xử lý dữ liệu dạng bảng - lưới, ví dụ như dữ liệu chuỗi thời gian có thể biểu diễn dưới dạng bảng 1D hay ảnh là dữ liệu 2D của các điểm ảnh. Năm 2012, Alex Krizhevsky xây dựng một mạng tích chập (AlexNet \cite{krizhevsky2012imagenet}) và tăng tốc quá trình huấn luyện sử dụng GPU. Mô hình đề xuất của Krizhevsky đứng đầu trong bảng xếp hạng trong cuộc thi phân loại ảnh ImageNet \cite{deng2009imagenet} với độ chính xác vượt hơn 10\% các đội tham gia. Hiện nay, mạng tích chập được áp dụng xử lý nhiều bài toán phức tạp trong xử lý ảnh, xử lý ngôn ngữ tự nhiên, xử lý tín hiệu âm thanh, ...
+Mạng nơ-ron tích chập (Convolutional neural networks - CNN), hay mạng tích chập, được đề xuất lần đầu vào năm 1989 bởi Yan LeCun \cite{lecun1989backpropagation} để giải quyết bài toán nhận dạng chữ viết tay. Mạng tích chập được thiết kế với mục tiêu xử lý dữ liệu dạng bảng - lưới, ví dụ như dữ liệu chuỗi thời gian có thể biểu diễn dưới dạng bảng 1D hay ảnh là dữ liệu 2D của các điểm ảnh. Năm 2012, Alex Krizhevsky xây dựng một mạng tích chập (AlexNet \cite{krizhevsky2012imagenet}) và tăng tốc quá trình huấn luyện sử dụng GPU. Mô hình đề xuất của Krizhevsky đứng đầu trong bảng xếp hạng trong cuộc thi phân loại ảnh ImageNet \cite{deng2009imagenet} với độ chính xác vượt hơn 10\% các đội tham gia. Hiện nay, mạng tích chập được áp dụng xử lý nhiều bài toán phức tạp trong xử lý ảnh, xử lý ngôn ngữ tự nhiên, xử lý tín hiệu âm thanh, ...
 
 \begin{figure}[h]
   \centering
@@ -119,40 +119,123 @@ Lớp tích chập là lớp được sử dụng nhiều nhất trong mạng n�
 \end{figure}
 \footnotetext{https://debuggercafe.com/visualizing-filters-and-feature-maps-in-convolutional-neural-networks-using-pytorch}
 
-Ban đầu, phép tích chập được được sử dụng phổ biến trong xử lý tín hiệu. Về sau nguyên lý biến đổi trong tích chập mới được áp dụng trong lĩnh vực xử lý hình ảnh. Công thức tích chập 
+Ban đầu, phép tích chập được được sử dụng phổ biến trong xử lý tín hiệu. Về sau nguyên lý biến đổi trong tích chập mới được áp dụng trong lĩnh vực xử lý hình ảnh. Công thức tích chập cho 2 hàm $x$ và $w$ theo chiều thời gian $t$ được tính như sau:
+
+\begin{equation}
+  (x * w)(t)=\sum x(\alpha) w(t-\alpha)
+\end{equation}
+
+trong đó $(x * w)$ là ký hiệu tích chập. Trong xử lý ảnh, phép tích chập được mở rộng ra 2D hoặc 3D. Trong lớp tích chập, $x$ được gọi là đầu vào của lớp còn $w$ được gọi là bộ lọc (filter) (Hình \ref{fig:convolution}). Phép toán tích chập dựa trên nơ-ron của lớp trước để tính toán ra giá trị nơ-ron của lớp ngay sau.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/convolution.png}
+  \caption{Một ví dụ của lớp tích chập \protect\footnotemark}
+  \label{fig:convolution}
+\end{figure}
+\footnotetext{https://towardsdatascience.com/convolution-neural-networks-a-beginners-guide-implementing-a-mnist-hand-written-digit-8aa60330d022}
+
+Bộ lọc là một bộ trọng số học được có kích thước nhỏ (ví dụ 5x5x3, dài rộng 5, chiều sâu 3 của khối đầu vào phía trước). Trong quá trình lan truyền tiến, bộ lọc được dịch chuyển trên cả chiều dài và chiều rộng của khối đầu vào để tổng hợp thông tin thành một khối đặc trưng 2D. Cùng với kích thước bộ lọc, lớp tích chập còn có 2 tham số bước nhảy (stride) và đệm (padding). Tham số bước nhảy quy định độ dịch chuyển của bộ lọc, còn tham số đệm là số lượng giá trị 0 được thêm vào xung quanh khối đầu vào để kiểm soát kích thước đầu ra của lớp tích chập.
+
+Có nhiều bộ lọc trong một lớp tích chập để học nhiều dạng thông tin đặc trưng khác nhau như cạnh thẳng, cạnh chéo, đốm màu hay các đặc trưng phức tạp hơn ở các lớp sâu hơn. Các khối đặc trưng 2D của nhiều bộ lọc được xếp chồng lên nhau thành một khối đặc trưng 3D (Hình \ref{fig:convolution}).
+
+Điểm khác biệt chính giữa lớp tích chập và lớp ẩn thông thường là tính cục bộ. Mỗi nơ-ron trong lớp tích chập chỉ được kết nối tới một số điểm nhất định trong lớp phía trước trong khi một nơ-ron trong lớp ẩn thông thường được kết nối tới tất cả nơ-ron ở lớp trước. 
+
+Mạng tích chập giả định đặc trưng học được ở một vùng ảnh cũng có thể phát hiện đặc trưng tương tự tại một vùng khác trong ảnh. Trong quá trình tính toán tích chập, bộ trọng số của bộ lọc được sử dụng đi sử dụng lại tại các vùng khác nhau của ảnh. Điều này giúp cho tổng số trọng số của lớp tích chập ít hơn nhiều so với một lớp ẩn trong mạng nơ-ron thông thường mà vẫn học được nhiều đặc trưng ý nghĩa. Trong quá trình lan truyền ngược, gradient của bộ lọc được tổng hợp từ nhiều vùng khác nhau.
 
 \subsubsection{Lớp tổng hợp}
+Lớp tổng hợp (pooling layer) có chức năng tổng hợp thông tin từ lớp trước, giảm số nơ-ron và trọng số trong mạng từ đó giảm chi phí tính toán. Ngoài ra lớp tổng hợp còn giúp biểu diễn qua các lớp nhất quán hơn với sự thay đổi nhỏ trong đầu vào từ đó giúp mô hình hiệu quả hơn với dữ liệu mới. Cách thức hoạt động của lớp tổng hợp tương đối đơn giản, nó dùng một cửa sổ (thường có kích thước 2x2) để trượt trên đầu vào. Với mỗi điểm trượt, lớp tổng hợp chọn giá trị lớn nhất trong vùng (tổng hợp cực đại - max pooling) hoặc lấy trung bình của các giá trị (tổng hợp trung bình - average pooling) làm giá trị cho ma trận đầu ra (Hình \ref{fig:pooling}).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/pooling.png}
+  \caption{Một ví dụ của tổng hợp cực đại và tổng hợp trung bình \cite{yani2019application}}
+  \label{fig:pooling}
+\end{figure}
+
 \subsubsection{Lớp kết nối đầy đủ}
+Trong mạng nơ-ron nhân tạo thông thường, mọi lớp trừ lớp đầu vào là lớp kết nối đầy đủ, nghĩa là nơ-ron ở lớp sau được tính toán dựa trên tất cả nơ-ron cảu lớp trước. Thông thường trong mạng nơ-ron tích chập, lớp kết nối đầy đủ nằm ở cuối mạng, đóng vai trò là bộ phân loại của mạng. Đầu ra của lớp tích chập hay lớp tổng hợp thường là ma trận 2D hoặc 3D, do vậy cần phải được duỗi thẳng thành một vec-tơ để làm đầu vào cho lớp kết nối đầy đủ.
 
+\subsection{Mạng nơ-ron residual}
+Các mạng học sâu khi mở rộng càng nhiều lớp càng có khả năng xấp xỉ các hàm phức tạp và giải quyết bài toán phức tạp hơn. Tuy nhiên, mạng rất sâu lại gặp phải vấn đề vanishing/exploding gradients, hiện tượng mà gradient tiến tới 0 hoặc vô hạn trong quá trình lan truyền ngược trong các lớp đầu khiến cho mô hình không được cải thiện.
 
-\section{Metric Learning}
-\subsection{Contrastive loss}
-\subsection{Triplet loss}
+Mạng nơ-ron residual (residual neural network - ResNet) \cite{variani2014deep} được ra đời để giải quyết vấn đề vanishing/exploding gradients. Để luồng thông tin tới được các lớp đầu của mạng trong quá trình lan truyền ngược, ResNet sử dụng một cấu trúc đặc biệt gọi là skip connection (Hình \ref{fig:skip-connection}). Skip connection khác với kết nối thông thường ở chỗ nó không kết nối 2 lớp liên tiếp mà kết nối 2 lớp không liền kề nhau. Khi lan truyền ngược, các kết nối này đưa gradient trực tiếp về các lớp phía đầu của mạng và tránh khỏi hiện tượng vanishing/exploding gradients.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/skip-connection.png}
+  \caption{Skip connection trong ResNet \cite{variani2014deep}}
+  \label{fig:skip-connection}
+\end{figure}
+
+ResNet có nhiều kiến trúc với nhiều độ sâu khác nhau, hình \ref{fig:resnet-architecture} mô tả các kiến trúc này. Với ResNet-18 và ResNet-34, các khối residual được xây dựng từ các lớp tích chập với bộ lọc kích thước 3x3. Các mô hình nhiều lớp hơn như ResNet-50, ResNet-101, ResNet-152 sử dụng khối nút thắt cổ chai (bottleneck) để giảm chi chí tính toán. Hình \ref{fig:resnet-blocks} mô tả kiến trúc hai khối này.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1.0\textwidth]{images/resnet-architectures.png}
+  \caption{Các kiến trúc khác nhau của ResNet \cite{variani2014deep}}
+  \label{fig:resnet-architecture}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1.0\textwidth]{images/resnet-blocks.png}
+  \caption{Kiến trúc hai khối residual trong các kiến trúc mạng ResNet \cite{variani2014deep}}
+  \label{fig:resnet-blocks}
+\end{figure}
+
+\section{Hàm mất mát}
+Như đã trình bày trong \ref*{ann}, trong học máy, hàm mất mát đo đạc sự sai khác của đầu ra trong nhãn đầu vào. Điều tương tự cũng áp dụng cho học sâu. Trong học sâu, hàm mất mát có thể chia thành hai nhóm: hàm mất mát phân loại và hàm mất mát phân biệt. Hai hàm mất mát đơn giản và được sử dụng rộng rãi nhất cho 2 nhóm là hàm softmax và hàm triplet.
+
+\subsubsection{Hàm mất mát softmax}
+Về cơ bản, hàm mất mát softmax là một hàm mất mát phân loại đa lớp gồm hàm kích hoạt softmax kết hợp hàm entropy chéo như mô tả trong công thức \ref*{eq:ce}. Thông thường trong một mạng học sâu phân loại, lớp đầu ra có số nơ-ron tương ứng với số lớp cần được phân loại (ví dụ mô hình phân loại 6 loại xe có 6 nơ-ron ở lớp đầu ra). Giá trị đại diện cho mỗi lớp ở tầng đầu ra là cái nhận được khi sử dụng mạng dự đoán cho một ví dụ. Hàm softmax đưa vec-tơ đầu ra về khoảng $(0, 1)$ và tổng của chúng đúng bằng 1. Bởi vì giá trị của một nơ-ron đại diện cho một lớp, có thể xem đó là xác suất dự đoán của lớp đó. Hàm mất mát softmax cho một ví dụ có vec-tơ biểu diễn $\bm{z}$ thuộc lớp $c$ được tính bằng công thức:
+\begin{equation}
+  \mathcal{L}_{\text {softmax}}(\bm{z}, c) = - log(\dfrac{e^{\bm{z}_c}}{\sum_j e^{\bm{z}_j}})
+\end{equation}
+
+\subsubsection{Hàm mất mát triplet}
+Khác với hàm mất mát phân loại, mục tiêu của hàm mất mát phân biệt là học điểm khác biệt giữa những vật thể hay ví dụ khác nhau. Các hàm phân biệt như triplet giúp mạng học không gian biểu diễn mà trong đó các ví dụ giống nhau sẽ gần nhau và những ví dụ khác nhau nằm xa nhau.
+
+Đầu vào của hàm triplet bao gồm 3 điểm trong không gian biểu diễn. Trong đó có 2 điểm dữ liệu và một điểm có nhãn khác 2 điểm còn lại. Trong mỗi ba điểm, có một điểm được gọi là neo (anchor) kí hiệu A, một điểm dương (positive) kí hiệu P có cùng nhãn với A, và một điểm âm (negative) kí hiệu N khác nhãn với A. Mục tiêu của hàm triplet là kéo điểm P gần hơn tới A trong không gian biểu diễn và đẩy P ra khỏi A sao cho khoảng cách A - P nhỏ hơn khoảng cách A - N một khoảng $m$ gọi là lề (margin) (Hình \ref{fig:triplet}). Với $m$ là tham số lề, $\bm{z}_i, \bm{z}_j, \bm{z}_k$ lần vượt là vec-tơ A, P, N, giá trị hàm triplet được tính như sau:
+
+\begin{equation}
+  \mathcal{L}_{\text {triplet }}\left(\bm{z}_{i}, \bm{z}_{j}, \bm{z}_{k}\right)=\max \left(0,\left\|\bm{z}_{i}-\bm{z}_{j}\right\|_{2}^{2}-\left\|\bm{z}_{i}-\bm{z}_{k}\right\|_{2}^{2}+m\right)
+\end{equation}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{images/triplet-loss.png}
+  \caption{Ví dụ hàm mất mát triplet \cite{ni2017fine}}
+  \label{fig:triplet}
+\end{figure}
 
 \section{Trích xuất thông tin}
 Xử lý tín hiệu đóng vai trò quan trọng trong bất kì hệ thống tiếng nói nào, từ nhận dạng tiếng nói tới nhận dạng người nói. Hai trong những đặc trưng âm thanh phổ biến nhất được sử dụng là filter banks và Mel-Frequency Cepstral Coefficients (MFCCs). 
 
 Trích xuất filter banks và MFCCs tuân theo quy trình khá tương tự nhau, tính toán filter banks yêu cầu ít hơn MFCCs một số bước. Quy trình trích xuất MFCCs gồm 6 bước chính (Hình \ref{fig:mfcc-computation}): nhấn mạnh (pre-emhphasis), cắt khung (framing), cửa sổ (windowing), biến đổi Fourier (Fourier transform), filter bank và cuối cùng là biến đổi cô sin rời rạc (Discrete cosine transform) để có kết quả là MFCC.
+
 % https://haythamfayek.com/2016/04/21/speech-processing-for-machine-learning.html
-\subsubsection{Bước 1: Nhấn mạnh}
+% \subsubsection{Bước 1: Nhấn mạnh}
 
-Trong bước này, tín hiệu đầu vào được đưa qua một bộ lọc để khuếch đại các tín hiệu với tần số cao. Tín hiệu đầu ra của bộ lọc $y_t$ tại thời gian $t$ được tính như sau: 
+% Trong bước này, tín hiệu đầu vào được đưa qua một bộ lọc để khuếch đại các tín hiệu với tần số cao. Tín hiệu đầu ra của bộ lọc $y_t$ tại thời gian $t$ được tính như sau: 
 
-\begin{equation}
-  y_t = x_y - \alpha x_{t-1} 
-\end{equation}
+% \begin{equation}
+%   y_t = x_y - \alpha x_{t-1} 
+% \end{equation}
 
-Trong đó, $x$ là dãy tín hiệu đầu vào và $\alpha$ là hệ số của bộ lọc. $\alpha$ thường nhận giá trị $0.95$ hoặc $0.97$.
+% Trong đó, $x$ là dãy tín hiệu đầu vào và $\alpha$ là hệ số của bộ lọc. $\alpha$ thường nhận giá trị $0.95$ hoặc $0.97$.
 
-\subsubsection{Bước 2: Cắt khung}
+% \subsubsection{Bước 2: Cắt khung}
 
-\subsubsection{Bước 3: Nhấn mạnh}
+% Sau bước nhấn mạnh, tín hiệu đầu vào cần được cắt thành các khung nhỏ theo thời gian. Lý do đằng sau bước này là tần số trong tín hiệu thay đổi theo thời gian, vì vậy trong hầu hết các trường hợp, việc thực hiện biến đổi Fourier trên toàn bộ tín hiệu là không hợp lý.
 
-\subsubsection{Bước 4: Nhấn mạnh}
+% \subsubsection{Bước 3: Nhấn mạnh}
 
-\subsubsection{Bước 5: Nhấn mạnh}
+% \subsubsection{Bước 4: Nhấn mạnh}
 
-\subsubsection{Bước 6: Nhấn mạnh}
+% \subsubsection{Bước 5: Nhấn mạnh}
+
+% \subsubsection{Bước 6: Nhấn mạnh}
 
 \begin{figure}[h]
   \centering
