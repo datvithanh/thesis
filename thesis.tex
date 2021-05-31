@@ -39,7 +39,7 @@
 \usepackage[english]{babel}
 \usepackage{amssymb}
 \usepackage{pifont}
-% \usepackage{subfig}
+% \usepackage{mathptmx}[]	% same Time New Roman
 
 \usepackage{bm}
 \usepackage[acronym, nonumberlist, shortcuts, toc]{glossaries}
@@ -73,6 +73,20 @@
     linkcolor=black,
     urlcolor=black
 }
+
+\captionsetup{
+    tablename=Bảng,
+    figurename=Hình
+}
+
+\addto\captionsenglish{\renewcommand\chaptername{Chương}}
+\addto\captionsenglish{\renewcommand{\contentsname}{Mục lục}}
+\addto\captionsenglish{\renewcommand{\bibname}{Tài liệu tham khảo}}
+\addto\captionsenglish{\renewcommand{\listfigurename}{Danh sách hình vẽ}}
+\addto\captionsenglish{\renewcommand{\listtablename}{Danh sách bảng}}
+
+\usepackage{tocloft}
+\setlength{\cftfignumwidth}{2.55em}
 
 \lstset{
     language=Python,
@@ -120,48 +134,49 @@
 \setlength{\columnsep}{0.5125cm}
 \renewcommand{\baselinestretch}{1.2}
 
-\fancypagestyle{IHA-fancy-style}{%
-  \fancyhf{}% Clear header and footer
-  \fancyhead[L]{\textit{This thesis is performed by: Vi Thanh Dat - 20164803 - CNTT2.02 - K61}}
-  \fancyfoot[R]{\thepage}% Custom footer
-  \renewcommand{\headrulewidth}{0.4pt}% Line at the header visible
-  \renewcommand{\footrulewidth}{0pt}% Line at the footer visible
-}
-% Redefine the plain page style
-\fancypagestyle{plain}{%
-  \fancyhf{}% Clear header and footer
-  \fancyhead[L]{\textit{This thesis is performed by: Vi Thanh Dat - 20164803 - CNTT2.02 - K61}}
-  \fancyfoot[R]{\thepage}% Custom footer
-  \renewcommand{\headrulewidth}{0.4pt}% Line at the header visible
-  \renewcommand{\footrulewidth}{0pt}% Line at the footer visible
-}
-\pagestyle{IHA-fancy-style}
+% \fancypagestyle{IHA-fancy-style}{%
+%   \fancyhf{}% Clear header and footer
+%   \fancyhead[L]{\textit{This thesis is performed by: Vi Thanh Dat - 20164803 - CNTT2.02 - K61}}
+%   \fancyfoot[R]{\thepage}% Custom footer
+%   \renewcommand{\headrulewidth}{0.4pt}% Line at the header visible
+%   \renewcommand{\footrulewidth}{0pt}% Line at the footer visible
+% }
+% % Redefine the plain page style
+% \fancypagestyle{plain}{%
+%   \fancyhf{}% Clear header and footer
+%   \fancyhead[L]{\textit{This thesis is performed by: Vi Thanh Dat - 20164803 - CNTT2.02 - K61}}
+%   \fancyfoot[R]{\thepage}% Custom footer
+%   \renewcommand{\headrulewidth}{0.4pt}% Line at the header visible
+%   \renewcommand{\footrulewidth}{0pt}% Line at the footer visible
+% }
+% \pagestyle{IHA-fancy-style}
 
 \begin{document}
+% \fontsize{13}{16}\selectfont
 
 \begin{spacing}{1.25}
     \thispagestyle{empty}
     \thisfancypage{\setlength{\fboxrule}{1pt}\doublebox}{}
     \begin{center}
-        {\fontsize{17}{20}\selectfont HANOI UNIVERSITY OF SCIENCE AND TECHNOLOGY} \\
-        {\fontsize{13}{17}\selectfont SCHOOL OF INFORMATION AND COMMUNICATION TECHNOLOGY} \\ [0.25cm]
+        {\fontsize{17}{20}\selectfont TRƯỜNG ĐẠI HỌC BÁCH KHOA HÀ NỘI} \\
+        {\fontsize{13}{17}\selectfont VIỆN CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG} \\ [0.25cm]
         \textbf{---------------*---------------} \\ [1cm]
         \includegraphics[width=0.2\textwidth]{hust.jpeg} \\ [1cm]
-        {\fontsize{25}{30}\selectfont \textbf{GRADUATION THESIS}} \\ [0.25cm]
-        {\fontsize{14}{17}\selectfont SUBMITTED IN PARTIAL FULFILLMENT \\
-        OF THE REQUIREMENTS FOR THE DEGREE OF} \\ [0.5cm]
-        {\fontsize{25}{30}\selectfont \textbf{ENGINEER}} \\ [0.5cm]
-        {\fontsize{14}{17}\selectfont IN} \\ [0.5cm]
-        {\fontsize{22}{26}\selectfont INFORMATION TECHNOLOGY} \\ [0.5cm]
-        {\fontsize{15}{15}\selectfont \textbf{\TODO{TITLE}}}
-        \\ [2.25cm]
+        {\fontsize{23}{28}\selectfont ĐỒ ÁN TỐT NGHIỆP} \\ [0.25cm]
+        % {\fontsize{14}{17}\selectfont SUBMITTED IN PARTIAL FULFILLMENT \\
+        % OF THE REQUIREMENTS FOR THE DEGREE OF} \\ [0.5cm]
+        {\fontsize{23}{28}\selectfont \textbf{NGÀNH CÔNG NGHỆ THÔNG TIN}} \\ [2.5cm]
+        % {\fontsize{14}{17}\selectfont IN} \\ [0.5cm]
+        % {\fontsize{22}{26}\selectfont INFORMATION TECHNOLOGY} \\ [0.5cm]
+        {\fontsize{15}{15}\selectfont \textbf{Nhận dạng người nói trong tiếng Việt với học sâu}} \\ [2.25cm]
         \begin{tabular}{ l l }
-            Author & : \textbf{Vi Thanh Dat} \\
-            Class & : CNTT2.02 K61 \\
-            Student ID & : 20164803 \\ [0.5cm]
-            Supervisor & : \TODO{supervisor}
+            Sinh viên thực hiện & : Vi Thành Đạt \\
+            Lớp & : CNTT2.02 K61 \\
+            Mã sinh viên & : 20164803 \\ [0.5cm]
+            Giảng viên đồng hướng dẫn   & : ThS. Đỗ Tuấn Anh \\
+                                        &\ \ TS. Nguyễn Thị Thu Trang
         \end{tabular} \\ [2.25cm]
-        {\fontsize{17}{20}\selectfont HANOI, 5 - 2021}
+        {\fontsize{17}{20}\selectfont Hà Nội, 05-2021}
     \end{center}
 \end{spacing}
 \pagebreak
@@ -171,7 +186,7 @@
 \selectfont
 
 \pagenumbering{roman}
-\setcounter{page}{1}
+% \setcounter{page}{1}
 % \begin{spacing}{1.0}
 %     \chapter*{Requirements for the Thesis}
 %     \section*{Student Information}
@@ -225,24 +240,16 @@
 
 \pagebreak
 
-\chapter*{Abstract}
-Placeholder
+\chapter*{Lời mở đầu}
+Nhận dạng người nói là quá trình trích xuất các thông tin riêng biệt của người nói có trong tín hiệu âm thanh. Nhận dạng người nói được ứng dụng rộng rãi trong nhiều lĩnh vực khác nhau có thể kể đến như tài chính ngân hàng, chăm sóc khách hàng, giám định pháp lý, ... Đối với nhận dạng người nói trong tiếng Việt, tuy còn ít nhưng đã có một số nghiên cứu về nhận dạng người nói phụ thuộc văn bản sử dụng các mô hình thống kê truyền thống như mô hình Markov ẩn (HMM) hay mô hình Gaussian hỗn hợp (GMM). Các nghiên cứu cho kết quả khả quan trong trường hợp phụ thuộc văn bản, tuy nhiên tính ứng dụng và độ thân thiện với người dùng thấp. Nhận dạng người nói không phụ thuộc văn bản mang lại sự linh hoạt cao khi triển khai trong thực tế tuy nhiên lại khó đạt được chất lượng mô hình tốt khi sử dụng các phương pháp truyền thống. 
 
-\chapter*{Tóm tắt}
-Placeholder
+Hiện nay với sự phát triển của các mô hình học sâu, hiệu suất trên bài toán nhận dạng người nói không phụ thuộc văn bản đã tăng lên đáng kể. Tuy nhiên để huấn luyện mô hình học sâu lại yêu cầu một lượng dữ liệu lớn, các mô hình tiếng Anh sử dụng hàng nghìn giờ dữ liệu trong quá trình huấn luyện.
 
-\chapter*{Summary}
-The thesis is divided into 5 chapters:
-\begin{itemize}
-    \item Chapter 1 describes the problem of training neural networks at scale, as well as the object detection problem that would be used as a case study.
-    \item Chapter 2 presents the theoretical background as well as related works, including machine learning, object detection and distributed training.
-    \item Chapter 3 details the design and implementation of BK.Synapse - the proposed framework - and a case study where it is applied to an object detection problem.
-    \item Chapter 4 reports on the results of several experiments and benchmarks.
-    \item Chapter 5 presents our conclusions and lays out plans for future works.
-\end{itemize}
+Bổ sưng thêm dữ liệu cho bài toán, đồ án kết hợp sử dụng ba bộ dữ liệu ZaloAI, VIVOS và VLSP, trong đó VIVOS và VLSP bắt nguồn từ bài toán nhận dạng giọng nói. Lỗi trong các bộ dữ liệu được loại bỏ sử dụng đặc trưng từ mô hình học sâu. Về phía mô hình, để giải quyết vấn đề thiếu hụt dữ liệu, đồ án nghiên cứu và sử dụng phương pháp học chuyển tiếp (transfer learning) từ mô hình tiếng Anh sang tiếng Việt. Đồng thời, đồ án thử nghiệm hàm tối ưu và cải tiến hàm mất mát để chọn ra phương thức huấn luyện cho kết quả tốt nhất trên tiếng Việt. Qua phần thực nghiệm, mô hình tối ưu sử dụng các phương pháp đề xuất đạt kết quả vượt trội so với mô hình cơ sở cho bài toán nhận dạng người nói tiếng Việt.
+% Qua phần thực nghiệm, mô hình huấn luyện sử dụng học chuyển tiếp, phương thức tối ưu stochastic gradient descent cùng hàm mất mát AMP-arc là mô hình cho kết quả tốt nhất cải thiện 3.152\% tỉ lệ lỗi bằng nhau (Equal error rate - EER) so với mô hình cơ sở.
 
-\pagebreak
 \pagenumbering{gobble}
+\setcounter{page}{1}
 \tableofcontents
 \pagebreak
 \pagenumbering{arabic}
@@ -254,46 +261,19 @@ The thesis is divided into 5 chapters:
 % \addcontentsline{toc}{chapter}{Glossary}
 \printglossary
 \pagebreak
-\setcounter{page}{1}
 
 \subfile{introduction.tex}
 \subfile{preliminaries.tex}
 \subfile{propose.tex}
 \subfile{results.tex}
 
-\chapter{Conclusions}
-.
+\chapter{Kết luận và hướng phát triển}
+Trong đồ án này, tác giả đã nghiên cứu việc áp dụng học sâu để giải quyết bài toán nhận dạng người nói không phụ thuộc văn bản. Đồ án tổng hợp và loại bỏ dữ liệu lỗi từ 3 nguồn ZaloAI, VIVOS và VLSP, cùng với kết hợp phương pháp học chuyển tiếp để giải quyết vấn đề thiếu hụt dữ liệu trong tiếng Việt. Nhận thấy dữ liệu còn nhiều tạp âm, đồ án thử nghiệm huấn luyện mô hình với dữ liệu khử tạp âm giúp cải thiện 0.560\% EER so với mô hình huấn luyện trên bộ dữ liệu còn tạp âm. Thử nghiệm phương pháp tối ưu cho thấy SGD giúp mô hình khái quát hoá tốt hơn trên tập dữ liệu so với Adam. Để giải quyết vấn đề biên quyết định yếu của hàm softmax trong hàm mất mát AP, tác giả đề xuất đưa hệ số phạt lề vào hàm AP theo hai cách khác nhau có tên là AMP-cos và AMP-arc. Qua phân tích phân bố điểm tương đồng, AMP-arc cho hiệu rõ rệt so với hàm AP trong việc phân tách phổ điểm. Mô hình cuối cùng sử dụng các phương pháp đề xuất đạt kết quả 2.698\% EER đạt kết quả vượt trội so với mô hình cơ sở với 5.860\% EER.
+
+Để ứng dụng được vào thực tế, mô hình cần có nhiều điểm phải cải thiện. Hiện tại, việc chọn người nói trong một mini-batch là hoàn toàn ngẫu nhiên, tính phân tách của mô hình có thể được cải thiện nếu có cơ chế đưa nhóm người khó phân biệt vào cùng một mini-batch. Ngoài ra, điểm tương đồng sau khi dự đoán của mô hình cũng có thể được chuẩn hoá dựa trên biểu diễn của một nhóm người đa dạng vùng miền giới tính, từ đó tăng khả năng phân biệt. Miền dữ liệu cũng là một vấn đề với mô hình; trong tương lai, tác giả sẽ thử nghiệm phương pháp học đối kháng để giảm ảnh hưởng của miền dữ liệu (tạp âm, các thiết bị thu âm khác nhau, ...) đối với biểu diễn người nói.
 
 \pagebreak
 \bibliographystyle{plain}
 \bibliography{mybib}
 \subfile{appendix.tex}
 \end{document}
-
-% 2 chương cho Propose: 
-% - optimize VoxCeleb
-% - SV for low resource languages
-% -> ko cần build large language corpus như thế nhưng vẫn
-
-% 1. Introduction
-% 2. Background (~10-15 trang)
-% 3. Optimize dataset VoxCeleb ()
-% - Trình bày baseline
-% - Phương pháp 
-% - Có experiment luôn
-
-% 4. Proposal low resource language
-% - Lấy cái baseline từ chương 3, however 
-
-% Thực nghiệm: 
-% - Baseline pretrained trên tiếng Việt
-% - train chung tiếng việt với VoxCeleb
-% - Trước và sau enhance
-% - train từ đầu bằng tiếng Việt
-% - Finetune với tiếng việt
-% - Finetune với tiếng Việt + loss
-
-
-% 3 & 4 trình bày như paper: intro, method, experiments (có link đến low resource languages)
-
-% 5. Experiment and evaluation ()

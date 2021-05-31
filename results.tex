@@ -5,7 +5,7 @@
 \section{Cơ sở dữ liệu}
 Để xây dựng cơ sở dữ liệu cho phần thực nghiệm, tác giả tổng hợp và sàng lọc dữ liệu từ ba bộ dữ liệu công khai: ZaloAI, VIVOS Corpus và VLSP ASR 2020.
 
-Bắt đầu từ năm 2018, ZaloAI challenge \cite{ZaloAIChallenge} là một cuộc thi thường niên tập trung vào trí tuệ nhân tạo do Zalo Group, VNG tổ chức. Năm 2020, ZaloAI challenge thử thách các nhà phát triển và kỹ sư học máy Việt Nam với ba bài toán: tóm tắt tin tức, phát hiện biển báo giao thông, và xác thực người nói. Bộ dữ liệu huấn luyện công khai của bài toán xác thực giọng nói bao gồm 400 danh tính tiếng Việt thu thập từ chương trình truyền hình Bạn muốn hẹn hò. Mỗi danh tính có trung bình \textit{26.4} câu nói với phân phối mô tả trong Hình \ref{fig:zaloai}. Bộ dữ liệu tuy đa dạng về mặt độ tuổi giới tính tuy nhiên vẫn còn vấn đề như: trùng lặp danh tính, nhiễu âm thanh như nhạc nền, người nói phía sau, câu nói của danh tính này lẫn vào danh tính kia, ...
+Bắt đầu từ năm 2018, ZaloAI challenge \cite{ZaloAIChallenge} là một cuộc thi thường niên tập trung vào trí tuệ nhân tạo do Zalo Group, VNG tổ chức. Năm 2020, ZaloAI challenge thử thách các nhà phát triển và kỹ sư học máy Việt Nam với ba bài toán: tóm tắt tin tức, phát hiện biển báo giao thông, và xác thực người nói. Bộ dữ liệu huấn luyện công khai của bài toán xác thực giọng nói bao gồm 400 danh tính tiếng Việt thu thập từ chương trình truyền hình Bạn muốn hẹn hò. Mỗi danh tính có trung bình \textit{26.4} câu nói với phân phối mô tả trong Hình \ref{fig:zaloai}. Bộ dữ liệu tuy đa dạng về mặt độ tuổi giới tính tuy nhiên vẫn còn vấn đề như: trùng lặp danh tính, nhiều tạp âm như nhạc nền, người nói phía sau, câu nói của danh tính này lẫn vào danh tính kia, ...
 
 \begin{figure}[h]
   \centering
@@ -14,12 +14,14 @@ Bắt đầu từ năm 2018, ZaloAI challenge \cite{ZaloAIChallenge} là một c
   \label{fig:zaloai}
 \end{figure}
 
-VIVOS là tập giọng nói tiếng Việt phục vụ cho bài toán nhận dạng tiếng nói thu thập bởi phòng thí nghiệm khoa học máy tính AILAB từ trường Đại học Khoa học Tự nhiên - Đại học Quốc Gia TP.HCM \cite{VIVOS}. Tuy chủ đích của bộ dữ liệu là dành cho nhận dạng tiếng nói nhưng lại có nhãn danh tính cụ thể nên có thể sử dụng cho bài toán nhận dạng người nói. Tập huấn luyện VIVOS bao gồm 40 danh tính với trung bình \textit{253.5} câu nói mỗi người. Tập kiểm thử có 19 danh tính không trùng với tập huấn luyện với trung bình \textit{40} câu nói mỗi người. Chất lượng dữ liệu của VIVOS rất tốt do điều kiện thu âm được kiểm soát nên không yêu cầu xử lý gì thêm.
+VIVOS là tập giọng nói tiếng Việt phục vụ cho bài toán nhận dạng tiếng nói thu thập bởi phòng thí nghiệm khoa học máy tính AILAB từ trường Đại học Khoa học Tự nhiên - Đại học Quốc Gia TP.HCM \cite{VIVOS}. Tuy chủ đích của bộ dữ liệu là dành cho nhận dạng tiếng nói nhưng lại có nhãn danh tính cụ thể nên có thể sử dụng cho bài toán nhận dạng người nói. Tập huấn luyện VIVOS bao gồm 40 danh tính với trung bình \textit{253.5} câu nói mỗi người. Tập kiểm thử có 19 danh tính không trùng với tập huấn luyện với trung bình \textit{40} câu nói mỗi người. Chất lượng âm thanh của VIVOS rất tốt do điều kiện thu âm được kiểm soát nên không yêu cầu xử lý gì thêm.
 
 Bộ dữ liệu VLSP ASR 2020 \cite{VLSP} nằm trong chiến dịch đánh giá năm 2020 của Hiệp hội xử lý Ngôn ngữ và Tiếng nói tiếng Việt. Giống như VIVOS, VLSP ASR 2020 được thu thập và thiết kế cho bài toán nhận diện giọng nói nhưng có nhãn danh tính cho các câu nói. Tổng số danh tính trong VLSP ASR 2020 là $567$ người với trung bình $22.3$ câu mỗi người. Tuy nhiên, dữ liệu danh tính của bộ dữ liệu lại không được chuẩn xác và có nhiều vấn đề tương tự như bộ ZaloAI. Những vấn đề này được giải quyết bằng phương pháp mô tả trong \ref{noise-removal}.
 
 \subsection{Cải thiện chất lượng bộ dữ liệu} \label{noise-removal}
 Hai bộ ZaloAI và VLSP có tổng cộng gần 1 nghìn danh tính và hơn 20 nghìn câu. Do vậy, việc kiểm tra dữ liệu rất khó khăn và tốn thời gian. Việc này còn trở nên khó khăn hơn khi đánh giá bằng tai người, ví dụ để phân biệt giọng của 2 người cùng là nam, giọng trầm miền bắc thì cần sự tập trung cao độ để tìm điểm khác biệt. Vì thế, đồ án phân tích ma trận tương đồng của các câu nói để tìm ra sự không nhất quán từ đó thu hẹp phạm vi kiểm tra.
+
+Ma trận tương đồng được áp dụng khá rộng rãi, trong đó, phổ biến nhất là phân tích âm nhạc dựa trên nội dung \cite{silva2018fast}, phân tích văn bản \cite{hussain2010improved} và tin sinh \cite{bustamam2018implementation}. Các kĩ thuật được sử dụng chủ yếu là phân cụm và phân đoạn. Trong đồ án, tác giả chỉ sử dụng phân tích đơn thuần để tìm ra các người nói, câu nói có khả năng bị gán nhãn sai.
 
 Cho một tập biểu diễn $n$ đoạn âm thanh đầu vào $\bm{V} = \{\bm{v}_0, \bm{v}_1, ..., \bm{v}_{n-1}\}$, sử dụng độ tương đồng cô-sin, ma trận tương đồng cho các đoạn tiếng nói được tính theo công thức \ref{eq:experiments1}. Ví dụ một ma trận tương đồng trong Hình \ref{fig:similarity-example}, đường chéo chính có giá trị tương đồng là 1 do so sánh mỗi câu với chính câu đó.
 
@@ -34,16 +36,14 @@ Cho một tập biểu diễn $n$ đoạn âm thanh đầu vào $\bm{V} = \{\bm{
   \label{fig:similarity-example}
 \end{figure}
 
-Ma trận tương đồng được áp dụng khá rộng rãi, trong đó, phổ biến nhất là phân tích âm nhạc dựa trên nội dung \cite{silva2018fast}, phân tích văn bản \cite{hussain2010improved} và tin sinh \cite{bustamam2018implementation}. Các kĩ thuật được sử dụng chủ yếu là phân cụm và phân đoạn. Trong đồ án, tác giả chỉ sử dụng phân tích đơn thuần để tìm ra các người nói, câu nói có khả năng bị gán nhãn sai.
-
 \subsubsection{Loại bỏ người nói không hợp lệ}
-Việc loại bỏ một danh tính có thể do nhiều lý do: nhiều câu nói không thuộc về người đó, chất lượng âm thanh kém, môi trường xung quanh ồn ào, tệp âm thanh bị hư hại qua đường truyền hoặc thiết bị, ... Các nguyên nhân này dẫn đến việc chất giọng của danh tính không được đảm bảo gây bất lợi cho việc huấn luyện mô hình. Một số danh tính có số lượng câu có vấn đề lớn, làm sạch và loại bỏ từng câu bằng việc nghe rất tốn thời gian và công sức. Do vậy, việc loại bỏ hẳn những danh tính này là cân thiết. Khi nhìn vào ma trận tương đồng của một danh tính, có thể thấy được và loại bỏ những danh tính không hợp lệ. Ma trận tương đồng của một người hợp lệ và bị loại bỏ có thể được thấy trong Hình \ref*{fig:similarity-example} và Hình \ref*{fig:similarity-utt-eer} tương ứng.
+Việc loại bỏ một danh tính có thể do nhiều lý do: nhiều câu nói không thuộc về người đó, chất lượng âm thanh kém, môi trường xung quanh ồn ào, tệp âm thanh bị hư hại qua đường truyền hoặc thiết bị, ... Các nguyên nhân này dẫn đến việc chất giọng của danh tính không được đảm bảo gây bất lợi cho việc huấn luyện mô hình. Một số danh tính có số lượng câu có vấn đề lớn, làm sạch và loại bỏ từng câu bằng việc nghe rất tốn thời gian và công sức. Do vậy, việc loại bỏ hẳn những danh tính này là cân thiết. Khi nhìn vào ma trận tương đồng của một danh tính, có thể thấy được và loại bỏ những danh tính không hợp lệ. Ma trận tương đồng của một người hợp lệ và bị loại bỏ có thể được thấy trong Hình \ref*{fig:similarity-example} và Hình \ref*{fig:similarity-speaker-eer} tương ứng.
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{images/similarity-spk-eer.png}
   \caption{Ma trận tương đồng của một danh tính bị loại bỏ}
-  \label{fig:similarity-utt-eer}
+  \label{fig:similarity-speaker-eer}
 \end{figure}
 
 \subsubsection{Loại bỏ đoạn tiếng nói không hợp lệ}
@@ -85,13 +85,13 @@ Do các bộ dữ liệu được thu thập một cách độc lập, có khả
     \caption{Ma trận tương đồng của 64-M-30 và 636-M-30}
     \label{fig:similarity-cross-sub2}
   \end{subfigure}
-  \caption{}
+  \caption{Ma trận tương đồng cho các cặp người nói khác nhau.}
   \label{fig:similarity-cross-sub2}
 \end{figure}
 
 % \subsubsection{Tổng kết cải thiện chất lượng dữ liệu}
 
-Bảng \ref*{tab:data-filtering} tổng kết thông tin sàng lọc dữ liệu. Số người nói bị loại bỏ chiếm \TODO{stat} tổng số người nói, số người nói được hợp nhất chiếm \TODO{stat} tổng số người nói, số câu nói bị loại bỏ chiếm \TODO{stat} tổng số câu. 
+Bảng \ref*{tab:data-filtering} tổng kết thông tin sàng lọc dữ liệu. Số người nói bị loại bỏ chiếm 5.15\% tổng số người nói, số người nói được hợp nhất chiếm 6.67\% tổng số người nói, số câu nói bị loại bỏ chiếm 6.16\% tổng số câu. 
 
 \begin{table}[h]
   \centering
@@ -105,7 +105,7 @@ Bảng \ref*{tab:data-filtering} tổng kết thông tin sàng lọc dữ liệu
     Tổng    & 65  & 84  & 1,617 \\
     \hline
   \end{tabular}
-  \caption{placeholder}
+  \caption{Thông số sàng lọc dữ liệu}
   \label{tab:data-filtering}
 \end{table}
 
@@ -118,6 +118,7 @@ Sau khi loại bỏ các danh tính không phù hợp, hợp nhất người nó
 \subsubsection{Thông số huấn luyện mô hình}
 Các thực nghiệm trong mục tiếp theo đều được chạy trên cùng bộ thông số như sau:
 \begin{itemize}
+  \item Tăng cường dữ liệu: nhiễu MUSAN \cite{snyder2015musan}, tiếng vang \cite{ko2017study}
   \item Mạng trích xuất đặc trưng: ResNet
   \item Lớp tổng hợp: Tổng hợp thống kê tập trung
   \item Batch size: 100
@@ -134,7 +135,7 @@ Trong phần này tác giả sử dụng tỉ lệ lỗi bằng nhau (Equal erro
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.7\textwidth]{images/eer.jpg}
+  \includegraphics[width=0.6\textwidth]{images/eer.jpg}
   \caption{Mô tả EER \protect\footnotemark}
   \label{fig:eer}
 \end{figure}
@@ -142,9 +143,9 @@ Trong phần này tác giả sử dụng tỉ lệ lỗi bằng nhau (Equal erro
 
 Có tổng cộng 1626 đoạn âm thanh của 59 người nói trong tập kiểm thử, các cặp câu hợp lệ và câu không hợp lệ được sinh ra từ mọi cặp câu có thể. Hệ thống tính điểm cho một cặp câu bằng việc tính độ tương đồng cô-sin của biểu diễn của 2 đoạn. Hai câu nói của cùng một người nói được coi là hợp lệ; hai câu nói từ 2 người nói khác nhau được coi là câu nói không hợp lệ. Với một ngưỡng cho trước, nếu cặp điểm câu nói hợp lệ dưới ngưỡng này (độ tương đồng thấp), câu nói đó được tính vào tỉ lệ từ chối giả. Ngược lại, nếu một cặp câu nói không hợp lệ có điểm nằm trên ngưỡng (tỉ lệ tương đồng cao), câu nói được tính vào tỉ lệ chấp nhận giả.
 
-Tác giả thực hiện nhiều trường hợp thực nghiệm khác nhau với mục tiêu huấn luyện mô hình nhận dạng người nói một cách hiệu quả trên tiếng Việt. Thực nghiệm 1 đánh giá hiệu quả của việc làm sạch dữ liệu như mô tả bên trên. Thực nghiệm 2 khảo sát các cách huấn luyện khác nhau so với transfer learning. Thực nghiệm 3 đánh giá hiệu quả trong việc khử nhiễu âm thanh trong. Thực nghiệm 4 so sánh mô hình khi sử dụng phương thức tối ưu Adam và SGD. Thực nghiệm 5 kiểm tra tính hiệu quả của hàm mất mát AMP-cos và AMP-arc với các giá trị hệ số phạt khác nhau.
+Tác giả thực hiện nhiều trường hợp thực nghiệm khác nhau với mục tiêu huấn luyện mô hình nhận dạng người nói một cách hiệu quả trên tiếng Việt. Thực nghiệm 1 đánh giá hiệu quả của việc làm sạch dữ liệu như mô tả bên trên. Thực nghiệm 2 khảo sát các cách huấn luyện khác nhau so với học chuyển tiếp. Thực nghiệm 3 đánh giá hiệu quả trong việc khử nhiễu âm thanh trong. Thực nghiệm 4 so sánh mô hình khi sử dụng phương thức tối ưu Adam và SGD. Thực nghiệm 5 kiểm tra tính hiệu quả của hàm mất mát AMP-cos và AMP-arc với các giá trị hệ số phạt khác nhau.
 
-\subsubsection{Thực nghiệm 1: làm sạch dữ liệu}
+\subsubsection{Thực nghiệm 1: Làm sạch dữ liệu}
 Bảng \ref*{tab:experiment-clean} mô tả kết quả thực nghiệm với dữ liệu ban đầu và dữ liệu đã được sàng lọc như đã trình bày trong \ref*{noise-removal}. Như có thể thấy, kết quả huấn luyện trên tập đã sàng lọc cải thiện 0.93\% EER so với dữ liệu gốc. Do vậy, các thực nghiệm về sau sẽ sử dụng bộ dữ liệu đã qua sàng lọc.
 
 \begin{table}[h]
@@ -162,9 +163,9 @@ Bảng \ref*{tab:experiment-clean} mô tả kết quả thực nghiệm với d�
 \end{table}
 
 \subsubsection{Thực nghiệm 2: Phương thức huấn luyện}
-Trong thực nghiệm này, tác giả tiến hành khảo sát các phương thức huấn luyện mô hình. Bảng \ref{tab:experiment-training} mô tả kết quả với các trường hợp khác nhau bao gồm: mô hình huấn luyện sẵn \cite{heo2020clova}, huấn luyện từ đầu trên dữ liệu tiếng Anh và tiếng Việt, huấn luyện từ đầu chỉ trên dữ liệu tiếng Việt, transfer learning trên dữ liệu tiếng Việt. 
+Trong thực nghiệm này, tác giả tiến hành khảo sát các phương thức huấn luyện mô hình. Bảng \ref{tab:experiment-training} mô tả kết quả với các trường hợp khác nhau bao gồm: mô hình huấn luyện sẵn \cite{heo2020clova}, huấn luyện từ đầu trên dữ liệu tiếng Anh và tiếng Việt, huấn luyện từ đầu chỉ trên dữ liệu tiếng Việt, học chuyển tiếp trên dữ liệu tiếng Việt. 
 
-Do số người nói trong bộ dữ liệu tiếng Việt ít hơn hẳn so với người nói tiếng Anh trong bộ dữ liệu VoxCeleb, huấn luyện không tập trung đủ để tìm ra các đặc trưng hữu ích để phân biệt người nói tiếng Việt, dẫn đến mô hình huấn luyện từ đầu kết hợp hai bộ dữ liệu đạt kết quả tệ hơn. Mô hình cơ sở (mô tả trong phần \ref{baseline}) huấn luyện từ đầu trên dữ liệu tiếng Việt đạt kết quả 5.860\% EER. Có thể thấy finetune bằng riêng dữ liệu tiếng Việt cho kết quả vượt trội so với huấn luyện từ đầu bằng bộ dữ liệu tiếng Việt hoặc kết hợp VoxCeleb (dữ liệu tiếng Anh) với EER 4.775\%. Kết quả cho thấy các đặc trưng người nói trong tiếng anh góp phần cải thiện mô hình tiếng Việt. Các thử nghiệm phía sau sử dụng phương pháp transfer learning trên bộ dữ liệu tiếng Việt.
+Do số người nói trong bộ dữ liệu tiếng Việt ít hơn hẳn so với người nói tiếng Anh trong bộ dữ liệu VoxCeleb, huấn luyện không tập trung đủ để tìm ra các đặc trưng hữu ích để phân biệt người nói tiếng Việt, dẫn đến mô hình huấn luyện từ đầu kết hợp hai bộ dữ liệu đạt kết quả tệ hơn. Mô hình cơ sở (mô tả trong phần \ref{baseline}) huấn luyện từ đầu trên dữ liệu tiếng Việt đạt kết quả 5.860\% EER. Có thể thấy finetune bằng riêng dữ liệu tiếng Việt cho kết quả vượt trội so với huấn luyện từ đầu bằng bộ dữ liệu tiếng Việt hoặc kết hợp VoxCeleb (dữ liệu tiếng Anh) với EER 4.775\%. Kết quả cho thấy các đặc trưng người nói trong tiếng anh góp phần cải thiện mô hình tiếng Việt. Các thử nghiệm phía sau sử dụng phương pháp học chuyển tiếp trên bộ dữ liệu tiếng Việt.
 
 \begin{table}[h]
   \centering
@@ -175,13 +176,12 @@ Do số người nói trong bộ dữ liệu tiếng Việt ít hơn hẳn so v�
     Pretrain & - & 10.60\% \\
     Huấn luyện từ đầu & Tiếng Việt \& VoxCeleb & 6.294\% \\
     Huấn luyện từ đầu & Tiếng Việt & 5.860\% \\
-    Transfer learning & Tiếng Việt & \textbf{4.775\%} \\
+    Học chuyển tiếp & Tiếng Việt & \textbf{4.775\%} \\
     \hline
   \end{tabular}
   \caption{EER trên tập kiểm tra với các phương pháp huấn luyện và dữ liệu khác nhau}
   \label{tab:experiment-training}
 \end{table}
-\TODO{name vietnamese dataset for ease in reference}
 
 \subsubsection{Thực nghiệm 3: Khử tạp âm trong tín hiệu giọng nói}
 Do chỉ có VIVOS là được thu thập từ phòng thu âm, tín hiệu giọng nói trong tập dữ liệu còn chứa nhiều tạp âm, ví dụ nhạc nền, tiếng ồn nhỏ xung quanh, âm thanh đường phố xe cộ. Các nhiễu tạp âm có khả năng cản trở mô hình học được chất giọng cần học từ dữ liệu. Do đó, tác giả sử dụng dữ liệu khử tạp âm dùng mô hình do bộ phận nghiên cứu trí tuệ nhân tạo tại Facebook phát triển \cite{defossez2020real} và đánh giá hiệu quả trong thực nghiệm này. Bảng \ref*{tab:experiment-denoising} cho thấy việc khử tạp âm có hiệu quả cao với 0.560\% EER cải thiện trên tập kiểm tra. Do vậy, trong các thực nghiệm tiếp theo, các mô hình được huấn luyện trên dữ liệu đã lọc tạp âm.
@@ -201,13 +201,13 @@ Do chỉ có VIVOS là được thu thập từ phòng thu âm, tín hiệu gi�
 \end{table}
 
 \subsubsection{Thực nghiệm 4: Phương pháp tối ưu}
-
+Bảng \ref{tab:experiment-optimizer} cung cấp kết quả 2 mô hình huấn luyện bằng phương pháp tối ưu Adam và SGD. Kết quả huấn luyện với SGD cải thiện tới 1.285\% so với mô hình huấn luyện với Adam. Thật vậy, khi quan sát giá trị của hàm mất mát trên tập huấn luyện trong hình \ref{fig:sgd-vs-adam1}, sự hội tụ của Adam khá nhất quán, thậm chí có phần tốt hơn SGD. Tuy nhiên, trong \ref{fig:sgd-vs-adam2}, kết quả EER trên tập kiểm thử của Adam rất không nhất quán ngay từ những vòng lặp đầu, trong khi SGD hội tụ rất tốt trên tập kiểm thử và không có dấu hiệu học quá khớp. Điều này chứng minh khả năng khái quát hoá vượt trội của SGD so với Adam cho bài toán.
 
 \begin{table}[h]
   \centering
   \begin{tabular}{|l|r|}
     \hline
-    \textbf{Dữ liệu}& \textbf{EER trên tập kiểm tra}\\
+    \textbf{Phương pháp tối ưu}& \textbf{EER trên tập kiểm tra}\\
     \hline
     Adam & 4.215\% \\
     SGD & \textbf{2.930\%} \\
@@ -217,30 +217,85 @@ Do chỉ có VIVOS là được thu thập từ phòng thu âm, tín hiệu gi�
   \label{tab:experiment-optimizer}
 \end{table}
 
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/loss.png}
+    \caption{Giá trị hàm mất mát trên tập huấn luyện}
+    \label{fig:sgd-vs-adam1}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/eer.png}
+    \caption{EER trên tập kiẻm thử}
+    \label{fig:sgd-vs-adam2}
+  \end{subfigure}
+  \caption{So sánh giá trị mất mát và EER của mô hình huấn luyện với SGD và Adam qua các vòng lặp}
+  \label{fig:sgd-vs-adam}
+\end{figure}
+
+Các mô hình trong thực nghiệm cuối cùng - thực nghiệm 5 sử dụng phương pháp tối ưu SGD.
+
 \subsubsection{Thực nghiệm 5: Hàm mất mát}
+Bảng \ref{tab:experiment-loss} mô tả kết quả thử nghiệm khi sử dụng hai phiên bản phạt lề khác nhau AMP-cos, AMP-arc của hàm AP. Nhìn chung, việc sử dụng hàm AMP có hiệu quả tích cực khi huấn luyện mô hình. Hai hàm AMP-cos và AMP-arc với hệ số phạt $m=0.2$ cho kết quả 2.754\% và 2.698\% tương ứng, tốt nhất so với hàm AP thông thường và AMP với các giá trị $m$ khác. Với $m$ lớn hơn 0.2, kết quả có xu hướng tệ đi khi tăng giá trị của $m$ do hiện tượng quá khớp.
 
 \begin{table}[h]
   \centering
-  \begin{tabular}{|l|r|}
+  \begin{tabular}{|l|r|r|}
     \hline
-    \textbf{Hàm mất mát}& \textbf{EER trên tập kiểm tra}\\
+    \textbf{Hàm mất mát}& \textbf{$m$} & \textbf{EER trên tập kiểm tra}\\
     \hline
-    AP & 2.930\% \\
-    AMP-cos (m=0.1) & 2.789\% \\ 
-    AMP-cos (m=0.2) & 2.749\% \\
-    AMP-cos (m=0.3) & 2.754\% \\
-    AMP-cos (m=0.4) & 2.804\%\\
-    AMP-cos (m=0.5) & 2.892\%\\
-    AMP-arc (m=0.1) & 2.782\% \\ 
-    AMP-arc (m=0.2) & \textbf{2.698\%} \\
-    AMP-arc (m=0.3) & 2.791\% \\
-    AMP-arc (m=0.4) & 2.790\%\\
-    AMP-arc (m=0.5) & 2.799\%\\
+    AP & 0.0 &2.930\% \\
+    AMP-cos & 0.1 & 2.789\% \\ 
+    AMP-cos & 0.2 & 2.749\% \\
+    AMP-cos & 0.3& 2.754\% \\
+    AMP-cos & 0.4 & 2.804\%\\
+    AMP-cos & 0.5 & 2.892\%\\
+    AMP-arc & 0.1 & 2.782\% \\ 
+    AMP-arc & 0.2 & \textbf{2.698\%} \\
+    AMP-arc & 0.3 & 2.791\% \\
+    AMP-arc & 0.4 & 2.790\%\\
+    AMP-arc & 0.5 & 2.799\%\\
     \hline
   \end{tabular}
   \caption{EER trên tập kiểm tra của mô hình huấn luyện với hàm mất mát AP, AMP-cos và AMP-arc với các giá trị phạt khác nhau}
   \label{tab:experiment-loss}
 \end{table}
 
-- Visualizing embedding space with t-SNE (some speakers)
-- DET curve
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/distribution.png}
+    \caption{Mô hình huấn luyện với AP}
+    \label{fig:score-distribution1}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/distribution-margin.png}
+    \caption{Mô hình huấn luyện với AMP-arc (m=0.2)}
+    \label{fig:score-distribution2}
+  \end{subfigure}
+  \caption{Phân bố điểm tương đồng của các cặp câu dương tính và âm tính. Các đường nét đứt mô tả giá trị trung bình điểm trương đồng}
+  \label{fig:score-distribution}
+\end{figure}
+
+Để hiễu rõ hơn về tính phân loại của biểu diễn người nói, phân bố điểm tương đồng cho các cặp câu dương tính và âm tính được thể hiện trong Hình \ref*{fig:score-distribution}. Hình \ref*{fig:score-distribution1} thể hiện phân bố điểm đoán bởi mô hình huấn luyện với hàm AP, Hình \ref*{fig:score-distribution2} thể hiện phân bố điểm đoán bởi mô hình huấn luyện với hàm AMP-arc (m=0.2). Hiệu quả của tính nhận dạng được quyết định bởi phần chồng lên nhau ở giữa của hai phân bố dương tính và âm tính. Với hàm AMP-arc, phần đuôi chồng nhau của hai phân bố nhỏ hơn và phần thân của hai phân bố nghiêng về phía ngược lại đối với phần chồng nhau. Ngoài ra, khoảng cách của điểm trung bình dương và âm tính được tăng lên gần 0.2 so với hàm AP, từ đó tăng tính phân loại.
+
+\subsubsection{Tổng hợp kết quả}
+
+Qua 5 phần thực nghiệm trình bày ở trên, có thể thấy rằng việc xử lý dữ liệu bao gồm làm sạch dữ liệu giúp cải thiện mô hình đầu ra. Phương pháp kết hợp sử dụng transfer learing, khử tạp âm trong tín hiệu giọng nói, SGD, và AMP-arc (m=0.2) đạt 2.698\% EER cải thiện 3.152\% so với mô hình cơ sở với 5.860\% EER trên tập kiểm tra. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{images/det.png}
+  \caption{Đường cong DET với mô hình cơ sở và các cải tiến. Đường EER $x=y$ màu xám. FT: Học chuyển tiếp, SE: speech enhancement - khử tạp âm.}
+  \label{fig:det}
+\end{figure}
+
+Đường cong đánh đánh đổi lỗi phát hiện (detection error tradeoff - DET) cho mô hình cơ sở và các mô hình cải tiến được mô tả trong Hình \ref*{fig:det}. Các điểm trên một đường đại diện cho một cặp FAR và FRR tại một ngưỡng nhất định. Có thể thấy rằng mô hình đề xuất tốt hơn mô hình cơ sở trên mọi điểm. Giả sử do nhu cầu mà một hệ thống muốn tỉ lệ chấp nhận nhầm kẻ xấu FAR là 2\%, mô hình đề xuất cho tỉ lệ từ chối nhầm FRR tương đối thấp xấp xỉ 3.5\% trong khi mô hình cơ sở cho kết quả cao khoảng 15\% FRR.
+
+Qua phân tích kết quả từ tập kiểm thử, phần lớn các trường hợp sai là từ nhóm người nói có giọng rất giống nhau. Giả sử nữ miền bắc giọng ấm thường bị lẫn với một danh tính nữ cũng có chất giọng tương tự. Điều này chứng tỏ mô hình chưa học được nhiều thông tin phân biệt từ nhóm những người có giọng gần giống nhau. Một số các trường hợp sai nữa là do đoạn âm thanh quá ngắn, nhỏ hơn 2 giây, mô hình không trích xuất được nhiều thông tin từ đoạn âm thanh ngắn.
+
+

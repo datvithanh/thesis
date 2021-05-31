@@ -1,6 +1,6 @@
 \documentclass[thesis.tex]{subfiles}
 \chapter{Nhận dạng người nói tiếng Việt}
-Trong chương này, tác giả trình bày phương pháp học sâu để giải quyết bài toán nhận diện người nói. Ngoài ra tác giả cũng đề xuất phương pháp để cải tiến mô hình hiện tại để đạt được kết quả cao hơn trên tiếng Việt.
+Trong chương này, tác giả điểm qua các kiên cứu liên quan, trình bày mô hình học sâu cơ sở giải quyết bài toán nhận diện người nói và đề xuất phương pháp để cải tiến mô hình hiện tại để đạt được kết quả cao hơn trên tiếng Việt.
 
 \section{Nghiên cứu liên quan}
 % \section{Các nghiên cứu học sâu giải quyết bài toán nhận diện giọng nói}
@@ -27,23 +27,24 @@ Phần lớn các nghiên cứu về nhận dạng người nói hướng tới 
 
 Một vài nghiên cứu nổi bật cho lớp tổng hợp có thể kể đến như: tổng hợp trung bình (average pooling) \cite{variani2014deep}, tổng hợp thống kê (statistical pooling) \cite{snyder2018x}, tổng hợp dựa trên cơ chế tập trung (attentive pooling) \cite{zhu2018self,okabe2018attentive}, hay mã hoá dựa trên từ điển NetVLAD/GhostVLAD trong \cite{xie2019utterance}.
 
-Các nghiên cứu tiên phong \cite{variani2014deep, nagrani2017voxceleb, snyder2018x, snyder2017deep} ứng dụng mạng nơ-ron nhận tạo vào bài toán nhận dạng người nói học không gian biểu diễn bằng các hàm mất mát phân loại (classification loss). Trên cơ sở đó, các nghiên cứu thịnh hành \cite{okabe2018attentive, snyder2019speaker, ravanelli2018speaker} sử dụng hàm softmax để huấn luyện mô hình. Hàm softmax có khả năng học để phân loại người nói một cách hiêu quả, tuy nhiên, nó không được thiết kế để tối ưu tính tương đồng trong không gian embedding. 
+Các nghiên cứu tiên phong \cite{variani2014deep, snyder2018x, snyder2017deep} ứng dụng mạng nơ-ron nhận tạo vào bài toán nhận dạng người nói học không gian biểu diễn bằng các hàm mất mát phân loại (classification loss). Trên cơ sở đó, các nghiên cứu thịnh hành \cite{okabe2018attentive, snyder2019speaker, ravanelli2018speaker} sử dụng hàm softmax để huấn luyện mô hình. Hàm softmax có khả năng học để phân loại người nói một cách hiêu quả, tuy nhiên, nó không được thiết kế để tối ưu tính tương đồng trong không gian biểu diễn. 
 
 Để giải quyết điểm yếu của softmax, công trình của Liu và cộng sự \cite{liu2017sphereface} đề xuất hàm angular softmax (A-Softmax) cho bài toán nhận diện khuôn mặt bằng cách dùng độ tương đồng cô-sin làm đầu vào của hàm softmax. Các nghiên cứu sau đó áp dụng hàm A-Softmax trên bài toán nhận dạng người nói \cite{villalba2019state, snyder2019jhu} cho thấy sự vượt trội của hàm này so với softmax thông thường. Các phiên bản cải tiến của hàm A-Softmax như AM-Softmax \cite{wang2018additive} và AAM-Softmax \cite{deng2019arcface} sử dụng hàm phạt biên trở nên phổ biến cho bài toán nhận dạng người nói do dễ dàng cài đặt và hiệu năng cao. Tuy nhiên, huấn luyện mô hình với AM-Softmax và AAM-Softmax khá khó khăn do hai hàm này rất nhạy cảm với sự điều chỉnh tham số.
+
+Bên cạnh nhóm hàm mục tiêu phân loại, học phân biệt cũng là lựa chọn phổ biến cho bài toán nhận dạng người nói. Thay vì phân loại, mục tiêu của học biểu diễn là tối ưu không gian biểu diễn \ref{fig:metric-learning}. Trong bài toán nhận dạng người nói, biểu diễn của các câu nói từ cùng một người được kéo lại gần nhau trong không gian biểu diễn, ngược lại câu của những người khác nhau bị đẩy ra xa. 
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{images/metric-learning.jpg}
-    \caption{Không gian embedding với học biểu diễn\cite{wang2019metric}}
+    \caption{Không gian biểu diễn với học phân biệt\cite{wang2019metric}}
     \label{fig:metric-learning}
 \end{figure}
 
-Bên cạnh nhóm hàm mục tiêu phân loại, học biểu diễn (Representation learning hay Metric learning) cũng là lựa chọn phổ biến cho bài toán nhận dạng người nói. Thay vì phân loại, mục tiêu của học biểu diễn là tối ưu không gian embedding \ref{fig:metric-learning}. Trong bài toán nhận dạng người nói, biểu diễn của các câu nói từ cùng một người được kéo lại gần nhau trong không gian embedding, ngược lại câu của những người khác nhau bị đẩy ra xa. 
-
-Hai hàm học biểu diễn nổi tiếng là contrastive loss \cite{chopra2005learning} và triplet loss \cite{schroff2015facenet} xuất phát từ bài toán nhận diện khuôn mặt cho kết quả hứa hẹn trong bài toán nhận diện người nói \cite{zhang2018text,rahman2018attention}. Năm 2020, Chung và cộng sự \cite{chung2020defence} đề xuất hàm Angular Prototypical cho kết quả vượt trội khi so với các hàm mục tiêu phân loại. 
+Hai hàm học biểu diễn nổi tiếng là contrastive loss \cite{chopra2005learning} và triplet loss \cite{schroff2015facenet} xuất phát từ bài toán nhận diện khuôn mặt cho kết quả hứa hẹn trong bài toán nhận diện người nói \cite{zhang2018text,rahman2018attention}.Năm 2020, Chung và cộng sự \cite{chung2020defence} đề xuất hàm Angular Prototypical cho kết quả vượt trội khi so với các hàm mục tiêu phân loại. 
+% \TODO{prototypical, GE2E}. 
 
 \section{Mô hình cơ sở}\label{baseline}
-Mô hình tác giả sử dụng trong đồ án tuân theo hệ thống ba pha được mô tả như trong \ref{related-works}, đây là sự kết hợp giữa mô hình ResNet-34, lớp tổng hợp thống kê tập trung (attentive statistic pooling - ASP) và hàm mất mát Angular Prototypical (AP). Kiến trúc của hệ thống được miêu tả trong Hình \ref{fig:ap-resnet}. 
+Mô hình tác giả sử dụng trong đồ án tuân theo hệ thống ba pha được mô tả như trong \ref{related-works}, đây là sự kết hợp giữa mô hình ResNet-34, lớp tổng hợp thống kê tập trung (attentive statistic pooling - ASP) và hàm mất mát Angular Prototypical (AP). Kiến trúc của mô hình được miêu tả trong Hình \ref{fig:ap-resnet}. 
 
 \begin{figure}[h]
     \centering
@@ -52,7 +53,7 @@ Mô hình tác giả sử dụng trong đồ án tuân theo hệ thống ba pha 
     \label{fig:ap-resnet}
 \end{figure}
 
-Trong các mục tiếp theo, tác giả sẽ trình bày chi tiết thành phần của hệ thống.
+Trong các mục tiếp theo, tác giả sẽ trình bày chi tiết thành phần của mô hình.
 
 \subsection{Biểu diễn khung âm thanh bằng mạng ResNet}
 Mạng ResNet sử dụng trong đồ án là biến thể của mạng ResNet-34 như mô tả trong hình \ref*{fig:resnet-architecture}. Tại mỗi lớp, mạng sử dụng một nửa số bộ lọc so với mạng ResNet-34 gốc trong các khối ResNet và chứa tổng cộng 8.0 triệu trọng số. Trong lớp tích chập đầu tiên, tham số bước nhảy được chỉnh thành 1 so với 2 trong mạng ResNet-34 gốc khiến đầu vào của các lớp đằng sau lớn hơn từ đó tăng khối lượng tính toán. Chi tiết cấu trúc của mạng được mô tả trong Bảng \ref*{tab:resnet-34}.
@@ -76,7 +77,7 @@ Mạng ResNet sử dụng trong đồ án là biến thể của mạng ResNet-3
       Flatten     & -  & -  & $L/8 \times 2048$ \\
       \hline
     \end{tabular}
-    \caption{placeholder}
+    \caption{Kiến trúc mạng ResNet sử dụng trong đồ án}
     \label{tab:resnet-34}
 \end{table}
 
@@ -153,43 +154,44 @@ Trong quá trình huấn luyện, câu truy vấn của mỗi người được 
 Trong công thức \ref*{eq:nll-softmax}, $\bm{S}_{i, i}$ là độ tương đồng của truy vấn người $i$ và nguyên mẫu của chính người đó. Bằng việc sử dụng hàm softmax, $\bm{S}_{i,i}$ được đẩy gần hơn tới 1 và mô hình bị "phạt" nặng hơn nếu độ tương đồng của truy vấn người $i$ tới nguyên mẫu của người khác lớn.
 
 \section{Đề xuất cải tiến mô hình}
-Trong phần này, đề xuất ....
+Trong phần này, nhận thấy một vài điểm chưa được tối ưu trong mô hình cơ sở, tác giả đề xuất các phương pháp giúp huấn luyện mô hình một cách có hiệu quả hơn bao gồm: học chuyển tiếp (transfer learning), hàm tối ưu SGD thay cho Adam trong mô hình cơ sở, thêm hệ số phạt góc cho hàm mất mát AP (Hình \ref{fig:overall-propose}). Các mục dưới trình bày chi tiết các phương pháp đề xuất.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\textwidth]{images/overall-propose.png}
-    \caption{Sơ đồ mô tả transfer learning sử dụng kiến thức hiện có cho các tác vụ mới}
+    \caption{Tổng quan phương pháp đề xuất cho nhận dạng người nói tiếng Việt}
     \label{fig:overall-propose}
 \end{figure}
 
-\subsection{Transfer learning}
-Transfer learning là một kỹ thuật trong học máy khi mà một mô hình được huấn luyện cho một tác vụ nhất định được sử dụng làm điểm bắt đầu cho một tác vụ khác. Transfer learning cho phép rút ngắn quá trình huấn luyện và gia tăng hiệu năng cho quá trình huấn luyện mô hình trên tác vụ mới với ít dữ liệu hơn đáng kể. 
+\subsection{Học chuyển tiếp}
+Học chuyển tiếp là một kỹ thuật trong học máy khi mà một mô hình được huấn luyện cho một tác vụ nhất định được sử dụng làm điểm bắt đầu cho một tác vụ khác. Học chuyển tiếp cho phép rút ngắn quá trình huấn luyện và gia tăng hiệu năng cho quá trình huấn luyện mô hình trên tác vụ mới với ít dữ liệu hơn đáng kể. 
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{images/transfer-learning.png}
-    \caption{Sơ đồ mô tả transfer learning sử dụng kiến thức hiện có cho các tác vụ mới \cite{sarkar2018hands}}
+    \caption{Sơ đồ mô tả học chuyển tiếp sử dụng kiến thức hiện có cho các tác vụ mới \cite{sarkar2018hands}}
     \label{fig:transfer-learning}
 \end{figure}
 
-Cụ thể hơn, transfer learning hỗ trợ việc huấn luyện tác vụ mục tiêu theo những cách sau: 
+Cụ thể hơn, học chuyển tiếp hỗ trợ việc huấn luyện tác vụ mục tiêu theo những cách sau: 
 
 \begin{itemize}
     \item Hiệu suất cơ sở tốt hơn (higher start): khi ta tăng cường kiến thức của mô hình mới với kiến thức từ mô hình gốc, hiệu suất cơ sở có thể cải thiện nhờ việc chuyển giao kiến thức.
     \item Thời gian huấn luyện ngắn hơn (higher slope): tốc độ hội tụ của mô hình mới có thể nhanh hơn dẫn tới thời gian huấn luyện ngắn hơn.
-    \item Kết quả cuối cùng tốt hơn (higher asymptote): hiệu suất cuối cùng cao hơn có thể đạt được bằng việc sử dụng transfer learning.
+    \item Kết quả cuối cùng tốt hơn (higher asymptote): hiệu suất cuối cùng cao hơn có thể đạt được bằng việc sử dụng học chuyển tiếp.
 \end{itemize}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{images/transfer-learning-benefits.png}
-    \caption{Lợi ích của transfer learning đối với việc huấn luyện mô hình \cite{aytar2011tabula}}
+    \caption{Lợi ích của học chuyển tiếp đối với việc huấn luyện mô hình \cite{aytar2011tabula}}
     \label{fig:transfer-learning-benefits}
 \end{figure}
 
-Huấn luyện mô hình học sâu cần một lượng lớn tài nguyên tính toán và dữ liệu, do đó transfer learning được sử dụng rộng rãi trong cộng đồng nghiên cứu học sâu cho bài toán thị giác máy tính hay xử lý ngôn ngữ tự nhiên. Các thư viện học sâu nổi tiếng như Pytorch hay Tensorflow đều công bố các mô hình huấn luyện sẵn trên hàng triệu hay chục triệu ảnh giúp cộng đồng phát triển các mô hình học sâu dễ dàng và hiệu quả hơn với ít dữ liệu. Gần đây, cộng đồng nghiên cứu xử lý ngôn ngữ tự nhiên cũng có thể lợi dụng các mô hình huấn luyện sẵn cực lớn với hàng trăm tỉ trọng số như BERT \cite{devlin2018bert}, GPT-2 \cite{radford2019language} hay GPT-3 \cite{brown2020language} để cải tiến các tác vụ hạ lưu như phân loại nhận dạng thực thể, phân tích cú pháp phụ thuộc, tóm tắt văn bản, ...
+Huấn luyện mô hình học sâu cần một lượng lớn tài nguyên tính toán và dữ liệu, do đó học chuyển tiếp được sử dụng rộng rãi trong cộng đồng nghiên cứu học sâu cho bài toán thị giác máy tính hay xử lý ngôn ngữ tự nhiên. Các thư viện học sâu nổi tiếng như Pytorch hay Tensorflow đều công bố các mô hình huấn luyện sẵn trên hàng triệu hay chục triệu ảnh giúp cộng đồng phát triển các mô hình học sâu dễ dàng và hiệu quả hơn với ít dữ liệu. Gần đây, cộng đồng nghiên cứu xử lý ngôn ngữ tự nhiên cũng có thể lợi dụng các mô hình huấn luyện sẵn cực lớn với hàng trăm tỉ trọng số như BERT \cite{devlin2018bert}, GPT-2 \cite{radford2019language} hay GPT-3 \cite{brown2020language} để cải tiến các tác vụ hạ lưu như phân loại nhận dạng thực thể, phân tích cú pháp phụ thuộc, tóm tắt văn bản, ...
 
-Trong nhận dạng người nói, transfer learning cũng được áp dụng \TODO{transfer learning in speaker recognition}. Trong đồ án, phương pháp transfer learning từ mô hình huấn luyện trên người nói tiếng Anh được áp dụng để cải thiện mô hình giọng nói tiếng Việt. 
+% Trong nhận dạng người nói, transfer learning cũng được áp dụng \TODO{transfer learning in speaker recognition}. 
+Trong đồ án, phương pháp học chuyển tiếp từ mô hình huấn luyện trên người nói tiếng Anh được áp dụng để cải thiện mô hình giọng nói tiếng Việt. 
 
 \subsection{SGD với momentum khái quát hoá tốt hơn Adam}
 Adam \cite{kingma2014adam} là một thuật toán tối ưu thích nghi hệ số học. Được công bố vào năm 2014, Adam được trình bày tại một hội nghị rất uy tín cho cộng đồng học sâu - ICLR 2015. Bài báo phát triển một thuật toán rất hứa hẹn, cho thấy sự hội tụ vượt trội so với các thuật toán hiện hành, dẫn đến tăng tốc trong quá trình huấn luyện. 
@@ -210,7 +212,7 @@ trong đó $\epsilon$ là một hệ số cực bé (ví dụ $10^{-6}$) để t
 
 Tuy nhiên sau một thời gian, cộng đồng bắt đầu nhận thấy trong một số trường hợp, Adam huấn luyện mô hình tệ hơn so với phương pháp tối ưu truyền thống SGD. Bằng thực nghiệm, nghiên cứu \cite{keskar2017improving} cho thấy Adam dù trong những vòng lặp đầu vượt trội so với SGD ở những vòng lặp đầu nhưng nhanh chóng trì trệ trong những vòng lặp sau. Wilson cùng cộng sự trong \cite{wilson2017marginal} chỉ ra rằng các phương pháp thích ứng như Adam hay Adadelta không khái quát hoá SGD với momentum sau khi thử nghiệm trên một loạt các tác vụ, không khuyến khích cộng đồng sử dụng các thuật toán thích ứng. Nhìn chung, các nghiên cứu cho thấy rằng tính tổng quá hoá của Adam tệ hơn SGD.
 
-Trong bài toán nhận diện người nói tập mở, tính tổng quát hoá của mô hình là đặc biệt quan trọng. Lý do chính là bởi vì môi trường trong pha kiểm thử khác nhau rất nhiều so với môi trường trong dữ liệu huấn luyện và đăng ký. Do vậy mô hình có tính tổng quát hoá cao, nghĩa là ít nhạy cảm với điều kiện của môi trường cho kết quả tốt hơn.
+Trong bài toán nhận diện người nói, người nói trong pha kiểm tra thường không có trong tập huấn luyện, tính tổng quát hoá của mô hình là đặc biệt quan trọng. Lý do chính là bởi vì môi trường trong pha kiểm thử khác nhau rất nhiều so với môi trường trong dữ liệu huấn luyện và đăng ký. Do vậy mô hình có tính tổng quát hoá cao, nghĩa là ít nhạy cảm với điều kiện của môi trường cho kết quả tốt hơn.
 
 Vì các lý do kể trên, đồ án đề xuất thay thế sử dụng SGD với momentum thay cho Adam trong mô hình cơ sở.
 
@@ -269,8 +271,14 @@ Thay công thức trên vào \ref{eq:nll-softmax}, ta được hàm mất mát A
 
 Sự co cụm của các câu người nói (intra-class compactness) và khoảng cách với các người nói khác (inter-class separability) là 2 yếu tố chính đóng góp cho khả năng phân biệt biểu diễn người nói trong không gian vec-tơ. Việc thêm hệ số phạt lề trực tiếp làm tăng khoảng cách giữa các người nói và gián tiếp làm co cụm vùng biểu diễn của một người (Hình \ref{fig:margin-angular-space}). 
 
-Đồ án sử dụng cả 
+Theo các tác giả của hàm ArcFace \cite{deng2019arcface}, thiết kế hệ số phạt theo các cách khác nhau có ảnh hưởng rất lớn trong quá trình huấn luyện mô hình. Hàm AMP-arc lấy cảm hứng từ hàm ArcFace có thuộc tính hình học tốt hơn hàm AMP-cos do nó có sự tương ứng chính xác với khoảng cách trong không gian góc. Hình \ref{fig:arcface} cho thấy trong trường hợp phân loại nhị phân, hàm arc biên quyết định tuyến tính trong toàn không gian trong khi hàm cos có biên quyết định phi tuyến tính.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\textwidth]{images/arcface.png}
+    \caption{Biên quyết định của các hàm khác nhau trong phân loại nhị phân \cite{schroff2015facenet}.}
+    \label{fig:arcface}
+\end{figure}
 
 % https://medium.com/analytics-vidhya/exploring-other-face-recognition-approaches-part-2-arcface-88cda1fdfeb8
 % https://medium.com/analytics-vidhya/exploring-other-face-recognition-approaches-part-1-cosface-4aed39afe7a8
