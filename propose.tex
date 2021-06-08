@@ -1,49 +1,8 @@
 \documentclass[thesis.tex]{subfiles}
-\chapter{Nhận dạng người nói tiếng Việt}
+\chapter{Mô hình xác minh người nói tiếng Việt}
 Trong chương này, tác giả điểm qua các kiên cứu liên quan, trình bày mô hình học sâu cơ sở giải quyết bài toán nhận diện người nói và đề xuất phương pháp để cải tiến mô hình hiện tại để đạt được kết quả cao hơn trên tiếng Việt.
 
-\section{Nghiên cứu liên quan}
-% \section{Các nghiên cứu học sâu giải quyết bài toán nhận diện giọng nói}
-\label{related-works}
-
-Các mô hình học sâu hiện đại giải quyết bài toán nhận diện giọng nói thường gồm ba phần chính (Hình \ref{fig:model-architecture}):
-
-\begin{itemize}
-    \item Một mạng nơ-ron làm công cụ trích xuất biểu diễn người nói cho một khung đặc trưng tiếng nói.
-    \item Lớp tổng hợp dữ liệu: lớp này sử dụng biểu diễn của các khung âm thanh từ mạng nơ-ron để tổng hợp ra một vec-tơ duy nhất đại diện cho đoạn tiếng nói đầu vào.
-    \item Một hàm mất mát để tối ưu toàn bộ mô hình.
-\end{itemize}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/x-vector.png}
-    \caption{Tổng quan mô hình nhận diện người nói \cite{snyder2018x}}
-    \label{fig:model-architecture}
-\end{figure}
-
-Trong pha kiểm tra, mạng nơ-ron và lớp tổng hợp dữ liệu được sử dụng để tạo ra vec-tơ biểu diễn của đoạn tiếng nói kiểm tra. Hàm mất mát chỉ được sử dụng trong pha phát triển, và bị loại bỏ trong pha kiểm tra và pha ghi danh.
-
-Phần lớn các nghiên cứu về nhận dạng người nói hướng tới cải thiện hệ thống qua nâng cao hiệu quả của lớp tổng hợp dữ liệu và hàm mất mát. Về mạng nơ-ron trích xuất đặc trưng, các nghiên cứu chủ yêu sử dụng các mạng xương sống thành công trong các bài toán khác như phân loại hình ảnh (Ví dụ: mạng VGG \cite{simonyan2014very} và mạng ResNet \cite{he2016deep}) và nhận dạng tiếng nói (mạng TDNN \cite{waibel1989phoneme} và mạng LSTM \cite{hochreiter1997long}). 
-
-Một vài nghiên cứu nổi bật cho lớp tổng hợp có thể kể đến như: tổng hợp trung bình (average pooling) \cite{variani2014deep}, tổng hợp thống kê (statistical pooling) \cite{snyder2018x}, tổng hợp dựa trên cơ chế tập trung (attentive pooling) \cite{zhu2018self,okabe2018attentive}, hay mã hoá dựa trên từ điển NetVLAD/GhostVLAD trong \cite{xie2019utterance}.
-
-Các nghiên cứu tiên phong \cite{variani2014deep, snyder2018x, snyder2017deep} ứng dụng mạng nơ-ron nhận tạo vào bài toán nhận dạng người nói học không gian biểu diễn bằng các hàm mất mát phân loại (classification loss). Trên cơ sở đó, các nghiên cứu thịnh hành \cite{okabe2018attentive, snyder2019speaker, ravanelli2018speaker} sử dụng hàm softmax để huấn luyện mô hình. Hàm softmax có khả năng học để phân loại người nói một cách hiêu quả, tuy nhiên, nó không được thiết kế để tối ưu tính tương đồng trong không gian biểu diễn. 
-
-Để giải quyết điểm yếu của softmax, công trình của Liu và cộng sự \cite{liu2017sphereface} đề xuất hàm angular softmax (A-Softmax) cho bài toán nhận diện khuôn mặt bằng cách dùng độ tương đồng cô-sin làm đầu vào của hàm softmax. Các nghiên cứu sau đó áp dụng hàm A-Softmax trên bài toán nhận dạng người nói \cite{villalba2019state, snyder2019jhu} cho thấy sự vượt trội của hàm này so với softmax thông thường. Các phiên bản cải tiến của hàm A-Softmax như AM-Softmax \cite{wang2018additive} và AAM-Softmax \cite{deng2019arcface} sử dụng hàm phạt biên trở nên phổ biến cho bài toán nhận dạng người nói do dễ dàng cài đặt và hiệu năng cao. Tuy nhiên, huấn luyện mô hình với AM-Softmax và AAM-Softmax khá khó khăn do hai hàm này rất nhạy cảm với sự điều chỉnh tham số.
-
-Bên cạnh nhóm hàm mục tiêu phân loại, học phân biệt cũng là lựa chọn phổ biến cho bài toán nhận dạng người nói. Thay vì phân loại, mục tiêu của học biểu diễn là tối ưu không gian biểu diễn \ref{fig:metric-learning}. Trong bài toán nhận dạng người nói, biểu diễn của các câu nói từ cùng một người được kéo lại gần nhau trong không gian biểu diễn, ngược lại câu của những người khác nhau bị đẩy ra xa. 
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.9\textwidth]{images/metric-learning.jpg}
-    \caption{Không gian biểu diễn với học phân biệt\cite{wang2019metric}}
-    \label{fig:metric-learning}
-\end{figure}
-
-Hai hàm học biểu diễn nổi tiếng là contrastive loss \cite{chopra2005learning} và triplet loss \cite{schroff2015facenet} xuất phát từ bài toán nhận diện khuôn mặt cho kết quả hứa hẹn trong bài toán nhận diện người nói \cite{zhang2018text,rahman2018attention}.Năm 2020, Chung và cộng sự \cite{chung2020defence} đề xuất hàm Angular Prototypical cho kết quả vượt trội khi so với các hàm mục tiêu phân loại. 
-% \TODO{prototypical, GE2E}. 
-
-\section{Mô hình cơ sở}\label{baseline}
+\section{Mô hình cơ sở cho tiếng Anh}\label{baseline}
 Mô hình tác giả sử dụng trong đồ án tuân theo hệ thống ba pha được mô tả như trong \ref{related-works}, đây là sự kết hợp giữa mô hình ResNet-34, lớp tổng hợp thống kê tập trung (attentive statistic pooling - ASP) và hàm mất mát Angular Prototypical (AP). Kiến trúc của mô hình được miêu tả trong Hình \ref{fig:ap-resnet}. 
 
 \begin{figure}[h]
@@ -153,7 +112,9 @@ Trong quá trình huấn luyện, câu truy vấn của mỗi người được 
 
 Trong công thức \ref*{eq:nll-softmax}, $\bm{S}_{i, i}$ là độ tương đồng của truy vấn người $i$ và nguyên mẫu của chính người đó. Bằng việc sử dụng hàm softmax, $\bm{S}_{i,i}$ được đẩy gần hơn tới 1 và mô hình bị "phạt" nặng hơn nếu độ tương đồng của truy vấn người $i$ tới nguyên mẫu của người khác lớn.
 
-\section{Đề xuất cải tiến mô hình}
+\section{Đề xuất mô hình cho tiếng Việt}
+\subsection{Mô hình tổng quan}
+
 Trong phần này, nhận thấy một vài điểm chưa được tối ưu trong mô hình cơ sở, tác giả đề xuất các phương pháp giúp huấn luyện mô hình một cách có hiệu quả hơn bao gồm: học chuyển tiếp (transfer learning), hàm tối ưu SGD thay cho Adam trong mô hình cơ sở, thêm hệ số phạt góc cho hàm mất mát AP (Hình \ref{fig:overall-propose}). Các mục dưới trình bày chi tiết các phương pháp đề xuất.
 
 \begin{figure}[h]
@@ -279,6 +240,47 @@ Theo các tác giả của hàm ArcFace \cite{deng2019arcface}, thiết kế h�
     \caption{Biên quyết định của các hàm khác nhau trong phân loại nhị phân \cite{schroff2015facenet}.}
     \label{fig:arcface}
 \end{figure}
+
+\section{Nghiên cứu liên quan}
+% \section{Các nghiên cứu học sâu giải quyết bài toán nhận diện giọng nói}
+\label{related-works}
+
+Các mô hình học sâu hiện đại giải quyết bài toán nhận diện giọng nói thường gồm ba phần chính (Hình \ref{fig:model-architecture}):
+
+\begin{itemize}
+    \item Một mạng nơ-ron làm công cụ trích xuất biểu diễn người nói cho một khung đặc trưng tiếng nói.
+    \item Lớp tổng hợp dữ liệu: lớp này sử dụng biểu diễn của các khung âm thanh từ mạng nơ-ron để tổng hợp ra một vec-tơ duy nhất đại diện cho đoạn tiếng nói đầu vào.
+    \item Một hàm mất mát để tối ưu toàn bộ mô hình.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/x-vector.png}
+    \caption{Tổng quan mô hình nhận diện người nói \cite{snyder2018x}}
+    \label{fig:model-architecture}
+\end{figure}
+
+Trong pha kiểm tra, mạng nơ-ron và lớp tổng hợp dữ liệu được sử dụng để tạo ra vec-tơ biểu diễn của đoạn tiếng nói kiểm tra. Hàm mất mát chỉ được sử dụng trong pha phát triển, và bị loại bỏ trong pha kiểm tra và pha ghi danh.
+
+Phần lớn các nghiên cứu về nhận dạng người nói hướng tới cải thiện hệ thống qua nâng cao hiệu quả của lớp tổng hợp dữ liệu và hàm mất mát. Về mạng nơ-ron trích xuất đặc trưng, các nghiên cứu chủ yêu sử dụng các mạng xương sống thành công trong các bài toán khác như phân loại hình ảnh (Ví dụ: mạng VGG \cite{simonyan2014very} và mạng ResNet \cite{he2016deep}) và nhận dạng tiếng nói (mạng TDNN \cite{waibel1989phoneme} và mạng LSTM \cite{hochreiter1997long}). 
+
+Một vài nghiên cứu nổi bật cho lớp tổng hợp có thể kể đến như: tổng hợp trung bình (average pooling) \cite{variani2014deep}, tổng hợp thống kê (statistical pooling) \cite{snyder2018x}, tổng hợp dựa trên cơ chế tập trung (attentive pooling) \cite{zhu2018self,okabe2018attentive}, hay mã hoá dựa trên từ điển NetVLAD/GhostVLAD trong \cite{xie2019utterance}.
+
+Các nghiên cứu tiên phong \cite{variani2014deep, snyder2018x, snyder2017deep} ứng dụng mạng nơ-ron nhận tạo vào bài toán nhận dạng người nói học không gian biểu diễn bằng các hàm mất mát phân loại (classification loss). Trên cơ sở đó, các nghiên cứu thịnh hành \cite{okabe2018attentive, snyder2019speaker, ravanelli2018speaker} sử dụng hàm softmax để huấn luyện mô hình. Hàm softmax có khả năng học để phân loại người nói một cách hiêu quả, tuy nhiên, nó không được thiết kế để tối ưu tính tương đồng trong không gian biểu diễn. 
+
+Để giải quyết điểm yếu của softmax, công trình của Liu và cộng sự \cite{liu2017sphereface} đề xuất hàm angular softmax (A-Softmax) cho bài toán nhận diện khuôn mặt bằng cách dùng độ tương đồng cô-sin làm đầu vào của hàm softmax. Các nghiên cứu sau đó áp dụng hàm A-Softmax trên bài toán nhận dạng người nói \cite{villalba2019state, snyder2019jhu} cho thấy sự vượt trội của hàm này so với softmax thông thường. Các phiên bản cải tiến của hàm A-Softmax như AM-Softmax \cite{wang2018additive} và AAM-Softmax \cite{deng2019arcface} sử dụng hàm phạt biên trở nên phổ biến cho bài toán nhận dạng người nói do dễ dàng cài đặt và hiệu năng cao. Tuy nhiên, huấn luyện mô hình với AM-Softmax và AAM-Softmax khá khó khăn do hai hàm này rất nhạy cảm với sự điều chỉnh tham số.
+
+Bên cạnh nhóm hàm mục tiêu phân loại, học phân biệt cũng là lựa chọn phổ biến cho bài toán nhận dạng người nói. Thay vì phân loại, mục tiêu của học biểu diễn là tối ưu không gian biểu diễn \ref{fig:metric-learning}. Trong bài toán nhận dạng người nói, biểu diễn của các câu nói từ cùng một người được kéo lại gần nhau trong không gian biểu diễn, ngược lại câu của những người khác nhau bị đẩy ra xa. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/metric-learning.jpg}
+    \caption{Không gian biểu diễn với học phân biệt\cite{wang2019metric}}
+    \label{fig:metric-learning}
+\end{figure}
+
+Hai hàm học biểu diễn nổi tiếng là contrastive loss \cite{chopra2005learning} và triplet loss \cite{schroff2015facenet} xuất phát từ bài toán nhận diện khuôn mặt cho kết quả hứa hẹn trong bài toán nhận diện người nói \cite{zhang2018text,rahman2018attention}.Năm 2020, Chung và cộng sự \cite{chung2020defence} đề xuất hàm Angular Prototypical cho kết quả vượt trội khi so với các hàm mục tiêu phân loại. 
+% \TODO{prototypical, GE2E}. 
 
 % https://medium.com/analytics-vidhya/exploring-other-face-recognition-approaches-part-2-arcface-88cda1fdfeb8
 % https://medium.com/analytics-vidhya/exploring-other-face-recognition-approaches-part-1-cosface-4aed39afe7a8

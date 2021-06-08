@@ -84,6 +84,10 @@
 \addto\captionsenglish{\renewcommand{\bibname}{Tài liệu tham khảo}}
 \addto\captionsenglish{\renewcommand{\listfigurename}{Danh sách hình vẽ}}
 \addto\captionsenglish{\renewcommand{\listtablename}{Danh sách bảng}}
+\renewcommand{\cftchappresnum}{Chương }
+\renewcommand{\cftchapnumwidth}{5.5em}
+
+
 
 \usepackage{tocloft}
 \setlength{\cftfignumwidth}{2.55em}
@@ -134,125 +138,129 @@
 \setlength{\columnsep}{0.5125cm}
 \renewcommand{\baselinestretch}{1.2}
 
-% \fancypagestyle{IHA-fancy-style}{%
-%   \fancyhf{}% Clear header and footer
-%   \fancyhead[L]{\textit{This thesis is performed by: Vi Thanh Dat - 20164803 - CNTT2.02 - K61}}
-%   \fancyfoot[R]{\thepage}% Custom footer
-%   \renewcommand{\headrulewidth}{0.4pt}% Line at the header visible
-%   \renewcommand{\footrulewidth}{0pt}% Line at the footer visible
-% }
-% % Redefine the plain page style
-% \fancypagestyle{plain}{%
-%   \fancyhf{}% Clear header and footer
-%   \fancyhead[L]{\textit{This thesis is performed by: Vi Thanh Dat - 20164803 - CNTT2.02 - K61}}
-%   \fancyfoot[R]{\thepage}% Custom footer
-%   \renewcommand{\headrulewidth}{0.4pt}% Line at the header visible
-%   \renewcommand{\footrulewidth}{0pt}% Line at the footer visible
-% }
-% \pagestyle{IHA-fancy-style}
-
 \begin{document}
-% \fontsize{13}{16}\selectfont
-
-\begin{spacing}{1.25}
-    \thispagestyle{empty}
-    \thisfancypage{\setlength{\fboxrule}{1pt}\doublebox}{}
-    \begin{center}
-        {\fontsize{17}{20}\selectfont TRƯỜNG ĐẠI HỌC BÁCH KHOA HÀ NỘI} \\
-        {\fontsize{13}{17}\selectfont VIỆN CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG} \\ [0.25cm]
-        \textbf{---------------*---------------} \\ [1cm]
-        \includegraphics[width=0.2\textwidth]{hust.jpeg} \\ [1cm]
-        {\fontsize{23}{28}\selectfont ĐỒ ÁN TỐT NGHIỆP} \\ [0.25cm]
-        % {\fontsize{14}{17}\selectfont SUBMITTED IN PARTIAL FULFILLMENT \\
-        % OF THE REQUIREMENTS FOR THE DEGREE OF} \\ [0.5cm]
-        {\fontsize{23}{28}\selectfont \textbf{NGÀNH CÔNG NGHỆ THÔNG TIN}} \\ [2.5cm]
-        % {\fontsize{14}{17}\selectfont IN} \\ [0.5cm]
-        % {\fontsize{22}{26}\selectfont INFORMATION TECHNOLOGY} \\ [0.5cm]
-        {\fontsize{15}{15}\selectfont \textbf{Nhận dạng người nói trong tiếng Việt với học sâu}} \\ [2.25cm]
-        \begin{tabular}{ l l }
-            Sinh viên thực hiện & : Vi Thành Đạt \\
-            Lớp & : CNTT2.02 K61 \\
-            Mã sinh viên & : 20164803 \\ [0.5cm]
-            Giảng viên đồng hướng dẫn   & : ThS. Đỗ Tuấn Anh \\
-                                        &\ \ TS. Nguyễn Thị Thu Trang
-        \end{tabular} \\ [2.25cm]
-        {\fontsize{17}{20}\selectfont Hà Nội, 05-2021}
-    \end{center}
-\end{spacing}
-\pagebreak
 
 \selectlanguage{english}
 \fontsize{13pt}{16pt}
 \selectfont
 
-\pagenumbering{roman}
-% \setcounter{page}{1}
-% \begin{spacing}{1.0}
-%     \chapter*{Requirements for the Thesis}
-%     \section*{Student Information}
-%     \begin{itemize}
-%         \begin{multicols}{2}
-%         \item \textbf{Full name:} VI THANH DAT
-%         \item \textbf{Class:} CNTT2.02 K61
-%         \item \textbf{Tel:} +84336 863 831
-%         \item \textbf{Email:} dat.vt164803@sis.hust.edu.vn
-%         \item \textbf{Program:} Full-time engineer
-%         \end{multicols}
-%         \item \textbf{This thesis is conducted at:} Hanoi University of Science and Technology
-%         \item \textbf{Duration:} from 22/01/2021 to
-%         24/05/2021
-%     \end{itemize}
-%     \section*{Objective of the Thesis}
-%         Apply deep learning and metric learning to speaker verification in Vietnamese.
-%     \section*{Main Tasks of the Thesis}
-%         \begin{itemize}
-%             \item Study different approaches for speaker verification.
-%             \item Study deep learning models and metric learning.
-%             \item Apply and improve multi-similarity loss for speaker verification.
-%             \item Prepare data, train, and evaluate deep learning models.
-%         \end{itemize}
+\begin{center}
+    \thispagestyle{empty}
+    \textsc{\LARGE \bfseries TRƯỜNG ĐẠI HỌC BÁCH KHOA HÀ NỘI }
+    \vspace{0.5cm}
+    % \textsc{\Large \bfseries VIỆN CÔNG NGHỆ THÔNG TIN VÀ
+    % TRUYỀN THÔNG}\\[1.5cm]
     
-%     \section*{The reassurance of student}
-%     I, Vi Thanh Dat, guarantee that this thesis is my own efforts under the guidance of \textit{thay tuan anh} and \textit{co trang}. \\
-%     All results presented in this thesis are truthful and are not copies of any other works.
-%     \begin{minipage}{0.5\textwidth}
-%         \hfill
-%     \end{minipage}
-%     \begin{minipage}[t]{0.5\textwidth}
-%         \begin{center}
-%         \textit{Hanoi, 1st May, 2021\\Author\\[2.5cm]Vi Thanh Dat}
-%         \end{center}
-%     \end{minipage}
-%     \subsection*{Confirmation of supervisors on the fulfillment of requirements and allowance of defense:}
-%     \dotfill\\.\dotfill\\.\dotfill\\.\dotfill\\\\
-%     \begin{minipage}{0.5\textwidth}
-%         \hfill
-%     \end{minipage}
-%     \begin{minipage}[t]{0.5\textwidth}
-%         \begin{center}
-%     \textit{Hanoi, 1st May, 2021\\Supervisor\\[2.5cm]Dr. Nguyen Thi Thu Trang}
-%         \end{center}
-%     \end{minipage}
-% \end{spacing}
+    \vspace{3cm}
+    
+    \begin{minipage}{0.9\textwidth} 
+    \begin{center}
+      \textsc{\huge  \bfseries ĐỒ ÁN TỐT NGHIỆP}
+    \end{center}
+    \end{minipage}\\[0.5cm]
+  
+    \vspace*{0.3cm}
 
-% \chapter*{Acknowledgments}
+    { \Huge \bfseries
+    % \vspace{5px}Hệ thống hỏi đáp tiếng Việt tự động\\theo miền dữ liệu}\\ [0.4cm]
+    % \vspace*{1cm}
+    \vspace{5px} Xác minh người nói trong\\ tiếng Việt với học sâu}\\ [0.4cm]
+    \vspace*{1cm}
+    
+    { \LARGE \bfseries
+        VI THÀNH ĐẠT \\
+    }
+    {\Large dat.vt164803@sis.hust.edu.vn}
+    \vspace{0.5cm}
+    
+    {\Large \textbf{Ngành: Công nghệ Thông tin}}\\
+    {\Large \textbf{Chuyên ngành: Khoa học Máy tính}}
+    
+    \vspace{2.5cm}
+    
+    \begin{tabular}{ll}
+    \textbf{Giảng viên hướng dẫn:} & TS. Nguyễn Thị Thu Trang \hrulefill \\
+                                   & ThS. Đỗ Tuấn Anh \ \ \ \ \ \ \ \ \ \ \ \hrulefill \\
+    & \\
+    \textbf{Bộ môn:} & Công nghệ phần mềm \\
+    \textbf{Viện:} & Công nghệ Thông tin và Truyền thông\\
+    \end{tabular}
+    
 
+    \vspace{3.5cm} 	
+    \begin{center}
+        {\LARGE \bfseries HÀ NỘI, 06/2021}
+    \end{center}
+  
+\end{center}
 
 \pagebreak
+\pagenumbering{roman}
 
-\chapter*{Lời mở đầu}
+\chapter*{\centering Lời cam kết}
+\addcontentsline{toc}{chapter}{Lời cam kết}
+
+    \hspace*{-0.3cm}
+    \begin{tabular}{ll}
+    \textbf{Họ và tên}: Vi Thành Đạt &  \\
+    \textbf{Điện thoại liên lạc}: +84336863831 & \textbf{Email}: dat.vt164803@sis.hust.edu.vn \\
+    \textbf{Lớp}: CNTT2.02-K61 & \textbf{Hệ đào tạo}: Đại học chính quy \\
+    \end{tabular}
+    \hspace*{-0.3cm}
+    \vspace{0.5cm}
+    
+    Tôi - \textit{Vi Thành Đạt} - cam kết Đồ án Tốt nghiệp (ĐATN) là công trình nghiên cứu của bản thân tôi dưới sự hướng dẫn của \textit{TS. Nguyễn Thị Thu Trang} và \textit{ThS. Đỗ Tuấn Anh}. Các kết quả nêu trong ĐATN là trung thực, là thành quả của riêng tôi, không sao chép theo bất kỳ công trình nào khác. Tất cả những tham khảo trong ĐATN - bao gồm hình ảnh, bảng biểu, số liệu và các câu từ trích dẫn  - đều được ghi rõ ràng và đầy đủ nguồn gốc trong danh mục tài liệu tham khảo. Tôi xin chịu trách nhiệm với dù chỉ một sao chép vi phạm quy chế nhà trường.
+    
+    \begin{flushright}
+        \textit{Hà Nội, ngày 01 tháng 06 năm 2021}\\
+    \end{flushright}
+    
+    % \begin{minipage}{0.55\textwidth} 
+    % \end{minipage}
+    \begin{flushright}
+        \begin{minipage}{0.45\textwidth} 
+            \begin{center}
+                Tác giả ĐATN\\
+            \end{center}
+        \end{minipage}
+    \end{flushright}
+    
+    \vspace{2cm}
+    
+    \begin{flushright}
+        \begin{minipage}{0.45\textwidth} 
+            \begin{center}
+                \textit{Họ và tên sinh viên}
+            \end{center}
+        \end{minipage}
+    \end{flushright}
+    
+    
+\newpage
+\chapter*{\centering Lời cảm ơn}
+\addcontentsline{toc}{chapter}{Lời cảm ơn}
+    \TODO{Đầu tiên, em xin phép được gửi tới các thầy cô trong trường Đại học Bách khoa Hà Nội cũng như các thầy cô trong viện Công nghệ Thông tin và Truyền thông lời cảm ơn chân thành vì những kiến thức, kỹ năng và sự tận tâm mà em đã nhận được trong suốt 4 năm học tập tại đây.}
+
+    Em xin được gửi lời cảm ơn sâu sắc nhất đến cô giáo, TS. Nguyễn Thị Thu Trang đã tận tình hướng dẫn, chỉ bảo và giúp đỡ em trong suốt quá trình thực hiện đồ án tốt nghiệp.
+    
+    Xin được gửi lời cảm ơn đến toàn thể bạn bè, các anh chị em đã cùng tôi học tập, nghiên cứu, nhiệt tình giúp đỡ tôi trong suốt hành trình 4 năm tại Đại học Bách khoa Hà Nội. Tuy rằng đây không phải thời gian quá dài nhưng những kinh nghiệm, kỹ năng và tình cảm mà tôi nhận được từ mọi người là không hề nhỏ và tôi thật sự trân trọng điều đó.
+    
+    Trong quá trình thực hiện đồ án tốt nghiệp, mặc dù bản thân đã cố gắng hết mình nhưng em vẫn không thể tránh khỏi những sai sót, kính mong các thầy cô thông cảm và góp ý để em hoàn thiện hơn sau này.
+    
+    Em xin chân thành cảm ơn!
+\newpage
+
+\chapter*{\centering Tóm tắt}
+\addcontentsline{toc}{chapter}{Tóm tắt}
+
 Nhận dạng người nói là quá trình trích xuất các thông tin riêng biệt của người nói có trong tín hiệu âm thanh. Nhận dạng người nói được ứng dụng rộng rãi trong nhiều lĩnh vực khác nhau có thể kể đến như tài chính ngân hàng, chăm sóc khách hàng, giám định pháp lý, ... Đối với nhận dạng người nói trong tiếng Việt, tuy còn ít nhưng đã có một số nghiên cứu về nhận dạng người nói phụ thuộc văn bản sử dụng các mô hình thống kê truyền thống như mô hình Markov ẩn (HMM) hay mô hình Gaussian hỗn hợp (GMM). Các nghiên cứu cho kết quả khả quan trong trường hợp phụ thuộc văn bản, tuy nhiên tính ứng dụng và độ thân thiện với người dùng thấp. Nhận dạng người nói không phụ thuộc văn bản mang lại sự linh hoạt cao khi triển khai trong thực tế tuy nhiên lại khó đạt được chất lượng mô hình tốt khi sử dụng các phương pháp truyền thống. 
 
 Hiện nay với sự phát triển của các mô hình học sâu, hiệu suất trên bài toán nhận dạng người nói không phụ thuộc văn bản đã tăng lên đáng kể. Tuy nhiên để huấn luyện mô hình học sâu lại yêu cầu một lượng dữ liệu lớn, các mô hình tiếng Anh sử dụng hàng nghìn giờ dữ liệu trong quá trình huấn luyện.
 
 Bổ sưng thêm dữ liệu cho bài toán, đồ án kết hợp sử dụng ba bộ dữ liệu ZaloAI, VIVOS và VLSP, trong đó VIVOS và VLSP bắt nguồn từ bài toán nhận dạng giọng nói. Lỗi trong các bộ dữ liệu được loại bỏ sử dụng đặc trưng từ mô hình học sâu. Về phía mô hình, để giải quyết vấn đề thiếu hụt dữ liệu, đồ án nghiên cứu và sử dụng phương pháp học chuyển tiếp (transfer learning) từ mô hình tiếng Anh sang tiếng Việt. Đồng thời, đồ án thử nghiệm hàm tối ưu và cải tiến hàm mất mát để chọn ra phương thức huấn luyện cho kết quả tốt nhất trên tiếng Việt. Qua phần thực nghiệm, mô hình tối ưu sử dụng các phương pháp đề xuất đạt kết quả vượt trội so với mô hình cơ sở cho bài toán nhận dạng người nói tiếng Việt.
-% Qua phần thực nghiệm, mô hình huấn luyện sử dụng học chuyển tiếp, phương thức tối ưu stochastic gradient descent cùng hàm mất mát AMP-arc là mô hình cho kết quả tốt nhất cải thiện 3.152\% tỉ lệ lỗi bằng nhau (Equal error rate - EER) so với mô hình cơ sở.
 
-\pagenumbering{gobble}
-\setcounter{page}{1}
 \tableofcontents
 \pagebreak
-\pagenumbering{arabic}
 \listoffigures
 \listoftables
 
@@ -261,6 +269,10 @@ Bổ sưng thêm dữ liệu cho bài toán, đồ án kết hợp sử dụng b
 % \addcontentsline{toc}{chapter}{Glossary}
 \printglossary
 \pagebreak
+
+\pagenumbering{arabic}
+% \pagenumbering{gobble}
+\setcounter{page}{1}
 
 \subfile{introduction.tex}
 \subfile{preliminaries.tex}
