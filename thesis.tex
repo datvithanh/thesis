@@ -39,6 +39,7 @@
 \usepackage[english]{babel}
 \usepackage{amssymb}
 \usepackage{pifont}
+
 % \usepackage{mathptmx}[]	% same Time New Roman
 
 \usepackage{bm}
@@ -182,7 +183,7 @@
     \textbf{Giảng viên hướng dẫn:} & TS. Nguyễn Thị Thu Trang \hrulefill \\
                                    & ThS. Đỗ Tuấn Anh \ \ \ \ \ \ \ \ \ \ \ \hrulefill \\
     & \\
-    \textbf{Bộ môn:} & Công nghệ phần mềm \\
+    \textbf{Bộ môn:} & Khoa học máy tính \\
     \textbf{Viện:} & Công nghệ Thông tin và Truyền thông\\
     \end{tabular}
     
@@ -239,25 +240,16 @@
 \newpage
 \chapter*{\centering Lời cảm ơn}
 \addcontentsline{toc}{chapter}{Lời cảm ơn}
-    \TODO{Đầu tiên, em xin phép được gửi tới các thầy cô trong trường Đại học Bách khoa Hà Nội cũng như các thầy cô trong viện Công nghệ Thông tin và Truyền thông lời cảm ơn chân thành vì những kiến thức, kỹ năng và sự tận tâm mà em đã nhận được trong suốt 4 năm học tập tại đây.}
-
-    Em xin được gửi lời cảm ơn sâu sắc nhất đến cô giáo, TS. Nguyễn Thị Thu Trang đã tận tình hướng dẫn, chỉ bảo và giúp đỡ em trong suốt quá trình thực hiện đồ án tốt nghiệp.
-    
-    Xin được gửi lời cảm ơn đến toàn thể bạn bè, các anh chị em đã cùng tôi học tập, nghiên cứu, nhiệt tình giúp đỡ tôi trong suốt hành trình 4 năm tại Đại học Bách khoa Hà Nội. Tuy rằng đây không phải thời gian quá dài nhưng những kinh nghiệm, kỹ năng và tình cảm mà tôi nhận được từ mọi người là không hề nhỏ và tôi thật sự trân trọng điều đó.
-    
-    Trong quá trình thực hiện đồ án tốt nghiệp, mặc dù bản thân đã cố gắng hết mình nhưng em vẫn không thể tránh khỏi những sai sót, kính mong các thầy cô thông cảm và góp ý để em hoàn thiện hơn sau này.
-    
-    Em xin chân thành cảm ơn!
+    \TODO{...}
 \newpage
 
 \chapter*{\centering Tóm tắt}
 \addcontentsline{toc}{chapter}{Tóm tắt}
+Xác minh người nói là quá trình tự động xác nhận danh tính một người bằng việc sử dụng thông tin riêng biệt của người nói có trong tín hiệu âm thanh. Với việc an ninh và bảo mật trên không gian mạng ngày càng được quan tâm, xác minh người nói trở thành một lĩnh vực nghiên cứu quan trọng. Trong tiếng Việt, lượng dữ liệu có nhãn người nói còn rất hạn chế so với tiếng Anh. Đồ án tập trung vào xây dựng bộ dữ liệu phục vụ cho bài toán xác minh người nói tiếng Việt cũng như nghiên cứu và cải tiến mô hình học sâu cho bài toán.
 
-Nhận dạng người nói là quá trình trích xuất các thông tin riêng biệt của người nói có trong tín hiệu âm thanh. Nhận dạng người nói được ứng dụng rộng rãi trong nhiều lĩnh vực khác nhau có thể kể đến như tài chính ngân hàng, chăm sóc khách hàng, giám định pháp lý, ... Đối với nhận dạng người nói trong tiếng Việt, tuy còn ít nhưng đã có một số nghiên cứu về nhận dạng người nói phụ thuộc văn bản sử dụng các mô hình thống kê truyền thống như mô hình Markov ẩn (HMM) hay mô hình Gaussian hỗn hợp (GMM). Các nghiên cứu cho kết quả khả quan trong trường hợp phụ thuộc văn bản, tuy nhiên tính ứng dụng và độ thân thiện với người dùng thấp. Nhận dạng người nói không phụ thuộc văn bản mang lại sự linh hoạt cao khi triển khai trong thực tế tuy nhiên lại khó đạt được chất lượng mô hình tốt khi sử dụng các phương pháp truyền thống. 
+Để xây dựng dữ liệu cho bài toán, đồ án kết hợp sử dụng ba bộ dữ liệu ZaloAI, VIVOS và VLSP, trong đó VIVOS và VLSP bắt nguồn từ bài toán nhận dạng giọng nói. Lỗi trong các bộ dữ liệu được loại bỏ sử dụng đặc trưng từ mô hình học sâu. Về phía mô hình, để giải quyết vấn đề thiếu hụt dữ liệu, đồ án nghiên cứu và sử dụng phương pháp học chuyển tiếp (transfer learning) từ mô hình tiếng Anh sang tiếng Việt. Đồ án sử dụng phương thức tối ưu SGD với tính khái quát hoá tốt thay cho Adam trong mô hình cơ sở. Cùng với đó, đồ án cải tiến hàm mất mát nguyên mẫu góc (Angular Prototypical - AP)\cite{chung2020defence} bằng cách thêm hệ số phạt lề nhằm tăng tính phân tách người nói của mô hình. Kết quả đánh giá cho thấy mô hình đề xuất đạt tỉ lệ lỗi bằng nhau (Equal Error Rate - EER) 2.698\% vượt trội so với 5.860\% của mô hình cơ sở cho bài toán xác minh người nói tiếng Việt.
 
-Hiện nay với sự phát triển của các mô hình học sâu, hiệu suất trên bài toán nhận dạng người nói không phụ thuộc văn bản đã tăng lên đáng kể. Tuy nhiên để huấn luyện mô hình học sâu lại yêu cầu một lượng dữ liệu lớn, các mô hình tiếng Anh sử dụng hàng nghìn giờ dữ liệu trong quá trình huấn luyện.
-
-Bổ sưng thêm dữ liệu cho bài toán, đồ án kết hợp sử dụng ba bộ dữ liệu ZaloAI, VIVOS và VLSP, trong đó VIVOS và VLSP bắt nguồn từ bài toán nhận dạng giọng nói. Lỗi trong các bộ dữ liệu được loại bỏ sử dụng đặc trưng từ mô hình học sâu. Về phía mô hình, để giải quyết vấn đề thiếu hụt dữ liệu, đồ án nghiên cứu và sử dụng phương pháp học chuyển tiếp (transfer learning) từ mô hình tiếng Anh sang tiếng Việt. Đồng thời, đồ án thử nghiệm hàm tối ưu và cải tiến hàm mất mát để chọn ra phương thức huấn luyện cho kết quả tốt nhất trên tiếng Việt. Qua phần thực nghiệm, mô hình tối ưu sử dụng các phương pháp đề xuất đạt kết quả vượt trội so với mô hình cơ sở cho bài toán nhận dạng người nói tiếng Việt.
+Trong tương lai, đồ án sẽ thu thập thêm dữ liệu người nói từ nguồn Youtube và triển khai ứng dụng hoặc API xác minh người nói. Ngoài ra, đồ án sẽ đưa nhóm người có giọng nói tương tự vào cùng một mini-batch để huấn luyện mô hình có tính phân tách cao hơn. 
 
 \tableofcontents
 \pagebreak
@@ -282,10 +274,11 @@ Bổ sưng thêm dữ liệu cho bài toán, đồ án kết hợp sử dụng b
 \chapter{Kết luận và hướng phát triển}
 Trong đồ án này, tác giả đã nghiên cứu việc áp dụng học sâu để giải quyết bài toán nhận dạng người nói không phụ thuộc văn bản. Đồ án tổng hợp và loại bỏ dữ liệu lỗi từ 3 nguồn ZaloAI, VIVOS và VLSP, cùng với kết hợp phương pháp học chuyển tiếp để giải quyết vấn đề thiếu hụt dữ liệu trong tiếng Việt. Nhận thấy dữ liệu còn nhiều tạp âm, đồ án thử nghiệm huấn luyện mô hình với dữ liệu khử tạp âm giúp cải thiện 0.560\% EER so với mô hình huấn luyện trên bộ dữ liệu còn tạp âm. Thử nghiệm phương pháp tối ưu cho thấy SGD giúp mô hình khái quát hoá tốt hơn trên tập dữ liệu so với Adam. Để giải quyết vấn đề biên quyết định yếu của hàm softmax trong hàm mất mát AP, tác giả đề xuất đưa hệ số phạt lề vào hàm AP theo hai cách khác nhau có tên là AMP-cos và AMP-arc. Qua phân tích phân bố điểm tương đồng, AMP-arc cho hiệu rõ rệt so với hàm AP trong việc phân tách phổ điểm. Mô hình cuối cùng sử dụng các phương pháp đề xuất đạt kết quả 2.698\% EER đạt kết quả vượt trội so với mô hình cơ sở với 5.860\% EER.
 
-Để ứng dụng được vào thực tế, mô hình cần có nhiều điểm phải cải thiện. Hiện tại, việc chọn người nói trong một mini-batch là hoàn toàn ngẫu nhiên, tính phân tách của mô hình có thể được cải thiện nếu có cơ chế đưa nhóm người khó phân biệt vào cùng một mini-batch. Ngoài ra, điểm tương đồng sau khi dự đoán của mô hình cũng có thể được chuẩn hoá dựa trên biểu diễn của một nhóm người đa dạng vùng miền giới tính, từ đó tăng khả năng phân biệt. Miền dữ liệu cũng là một vấn đề với mô hình; trong tương lai, tác giả sẽ thử nghiệm phương pháp học đối kháng để giảm ảnh hưởng của miền dữ liệu (tạp âm, các thiết bị thu âm khác nhau, ...) đối với biểu diễn người nói.
+Tuy mô hình hiện tại đạt kết quả khả quan, vẫn còn một số thành phần cần phát triển thêm. Hiện tại, việc chọn người nói trong một mini-batch là hoàn toàn ngẫu nhiên, tính phân tách của mô hình có thể được cải thiện nếu có cơ chế đưa nhóm người khó phân biệt vào cùng một mini-batch. Ngoài ra, điểm tương đồng sau khi dự đoán của mô hình cũng có thể được chuẩn hoá dựa trên biểu diễn của một nhóm người đa dạng vùng miền giới tính, từ đó tăng khả năng phân biệt. Miền dữ liệu cũng là một vấn đề với mô hình; trong tương lai, tác giả sẽ thử nghiệm phương pháp học đối kháng để giảm ảnh hưởng của miền dữ liệu (tạp âm, các thiết bị thu âm khác nhau, ...) đối với biểu diễn người nói.
 
 \pagebreak
-\bibliographystyle{plain}
+% \bibliographystyle{plain}
+\bibliographystyle{unsrtnat}
 \bibliography{mybib}
 \subfile{appendix.tex}
 \end{document}
