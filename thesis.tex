@@ -20,6 +20,7 @@
 \usepackage{multirow}
 \usepackage{diagbox}
 \usepackage{amsmath}
+\usepackage{xparse}
 \usepackage{bm}
 \usepackage{tabu}
 \usepackage{booktabs}
@@ -27,6 +28,7 @@
 \usepackage{placeins}
 \usepackage{multirow}
 \usepackage{setspace}
+
 % \usepackage[backend=biber, sorting=none]{biblatex}
 \usepackage{listings}
 \usepackage[nottoc]{tocbibind}
@@ -174,16 +176,15 @@
     {\Large dat.vt164803@sis.hust.edu.vn}
     \vspace{0.5cm}
     
-    {\Large \textbf{Ngành: Công nghệ Thông tin}}\\
-    {\Large \textbf{Chuyên ngành: Khoa học Máy tính}}
+    {\Large \textbf{Ngành: Khoa học Máy tính}}
     
     \vspace{2.5cm}
     
     \begin{tabular}{ll}
-    \textbf{Giảng viên hướng dẫn:} & TS. Nguyễn Thị Thu Trang \hrulefill \\
-                                   & ThS. Đỗ Tuấn Anh \ \ \ \ \ \ \ \ \ \ \ \hrulefill \\
+    \textbf{Giảng viên hướng dẫn:} & TS. Nguyễn Thị Thu Trang \rule{3cm}{0.4pt} \\
+                                   & ThS. Đỗ Tuấn Anh \ \ \ \ \ \ \ \ \ \ \ \rule{3cm}{0.4pt} \\
     & \\
-    \textbf{Bộ môn:} & Khoa học máy tính \\
+    \textbf{Bộ môn:} & Khoa học máy tính và Công nghệ phần mềm \\
     \textbf{Viện:} & Công nghệ Thông tin và Truyền thông\\
     \end{tabular}
     
@@ -197,57 +198,108 @@
 
 \pagebreak
 \pagenumbering{roman}
+\chapter*{Phiếu giao nhiệm vụ đồ án\\ tốt nghiệp}
+\section*{Thông tin về sinh viên}
 
-\chapter*{\centering Lời cam kết}
-\addcontentsline{toc}{chapter}{Lời cam kết}
+\begin{itemize}
+    \begin{multicols}{2}
+        \item \textbf{Họ tên:} Vi Thành Đạt
+        \item \textbf{Điện thoại liên lạc:} 0336863831
+        \item \textbf{Lớp:} CNTT2.02-K61
+        \item \textbf{Email: } dat.vt164803@sis.hust.edu.vn
+        \item \textbf{Hệ đào tạo:} Đại học chính quy
+    \end{multicols}
+    \item \textbf{Đồ án tốt nghiệp được thực hiện tại:} viện Công nghệ thông tin và truyền thông.
+    \item \textbf{Thời gian làm đồ án tốt nghiệp: } Từ ngày 10/2/2021 đến 15/06/2021.
+\end{itemize}
+\section*{Mục đích nội dung của đồ án tốt nghiệp}
+Tìm hiểu, thử nghiệm các mô hình xác minh người nói, xây dựng bộ dữ liệu xác minh người nói tiếng Việt. Phát triển và cải tiến mô hình xác minh người nói nhằm nâng cao độ chính xác với dữ liệu nhỏ.
 
-    \hspace*{-0.3cm}
-    \begin{tabular}{ll}
-    \textbf{Họ và tên}: Vi Thành Đạt &  \\
-    \textbf{Điện thoại liên lạc}: +84336863831 & \textbf{Email}: dat.vt164803@sis.hust.edu.vn \\
-    \textbf{Lớp}: CNTT2.02-K61 & \textbf{Hệ đào tạo}: Đại học chính quy \\
-    \end{tabular}
-    \hspace*{-0.3cm}
-    \vspace{0.5cm}
+\section*{Các nhiệm vụ cụ thể của đồ án tốt nghiệp}
+\begin{enumerate}
+    \item Tìm hiểu bài toán xác minh người nói. 
+    \item Tìm hiểu các phương pháp tốt nhất hiện nay cho bài toán xác minh người nói.
+    \item Đề xuất các mô hình mới hiệu quả hơn với ít dữ liệu huấn luyện.
+    \item Xây dựng bộ dữ liệu xác minh người nói tiếng Việt.
+    \item Thực nghiệm và đánh giá kết quả các mô hình đề xuất.
+\end{enumerate}
+\section*{Lời cam đoan của sinh viên}
+Tôi - \textit{Vi Thành Đạt} - cam kết Đồ án Tốt nghiệp (ĐATN) là công trình nghiên cứu của bản thân tôi dưới sự hướng dẫn của \textit{TS. Nguyễn Thị Thu Trang} và \textit{ThS. Đỗ Tuấn Anh}. Các kết quả nêu trong ĐATN là trung thực, là thành quả của riêng tôi, không sao chép theo bất kỳ công trình nào khác. Tất cả những tham khảo trong ĐATN - bao gồm hình ảnh, bảng biểu, số liệu và các câu từ trích dẫn  - đều được ghi rõ ràng và đầy đủ nguồn gốc trong danh mục tài liệu tham khảo. Tôi xin chịu trách nhiệm với dù chỉ một sao chép vi phạm quy chế nhà trường.
+
+%\restoregeometry
+\begin{minipage}{0.5\textwidth}
+    .
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
     
-    Tôi - \textit{Vi Thành Đạt} - cam kết Đồ án Tốt nghiệp (ĐATN) là công trình nghiên cứu của bản thân tôi dưới sự hướng dẫn của \textit{TS. Nguyễn Thị Thu Trang} và \textit{ThS. Đỗ Tuấn Anh}. Các kết quả nêu trong ĐATN là trung thực, là thành quả của riêng tôi, không sao chép theo bất kỳ công trình nào khác. Tất cả những tham khảo trong ĐATN - bao gồm hình ảnh, bảng biểu, số liệu và các câu từ trích dẫn  - đều được ghi rõ ràng và đầy đủ nguồn gốc trong danh mục tài liệu tham khảo. Tôi xin chịu trách nhiệm với dù chỉ một sao chép vi phạm quy chế nhà trường.
+    \begin{center}
+        \textit{Hà Nội}, ngày 15 tháng 06 năm 2021 \\
+        Sinh viên\\[3cm]
+        
+        Vi Thành Đạt
+    \end{center}
+\end{minipage}
+\subsection*{Xác nhận của giáo viên hướng dẫn về mức độ hoàn thành và cho phép bảo vệ:}
+.\dotfill \\
+.\dotfill \\ 
+.\dotfill \\ 
+
+% \begin{minipage}{0.3\textwidth}
+%     .
+%     % \begin{center}
+%     %     \textit{Hà Nội}, ngày 15 tháng 06 năm 2021 \\
+%     %     Giảng viên hướng dẫn\\[2cm]
+        
+%     %     \textit{ThS. Đỗ Tuấn Anh}
+%     % \end{center}
+% \end{minipage}
+
+% \begin{minipage}[t]{0.3\textwidth}
+%     \begin{center}
+%         \textit{Hà Nội}, ngày 15 tháng 06 năm 2021 \\
+%         Giảng viên hướng dẫn\\[2cm]
+        
+%         \textit{TS. Nguyễn Thị Thu Trang}
+%     \end{center}
+% \end{minipage}
+
+\begin{minipage}{0.5\textwidth}
+    .
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
     
-    \begin{flushright}
-        \textit{Hà Nội, ngày 01 tháng 06 năm 2021}\\
-    \end{flushright}
-    
-    % \begin{minipage}{0.55\textwidth} 
-    % \end{minipage}
-    \begin{flushright}
-        \begin{minipage}{0.45\textwidth} 
-            \begin{center}
-                Tác giả ĐATN\\
-            \end{center}
-        \end{minipage}
-    \end{flushright}
-    
-    \vspace{2cm}
-    
-    \begin{flushright}
-        \begin{minipage}{0.45\textwidth} 
-            \begin{center}
-                \textit{Họ và tên sinh viên}
-            \end{center}
-        \end{minipage}
-    \end{flushright}
-    
-    
+    \begin{center}
+        \textit{Hà Nội}, ngày 15 tháng 06 năm 2021 \\
+        Giảng viên hướng dẫn\\[3cm]
+        
+        \textit{TS. Nguyễn Thị Thu Trang}
+    \end{center}
+\end{minipage}
 \newpage
+
 \chapter*{\centering Lời cảm ơn}
 \addcontentsline{toc}{chapter}{Lời cảm ơn}
-    \TODO{...}
+Lời đầu tiên tôi xin gửi lời cảm ơn chân thành nhất tới các thầy giáo, cô giáo trường Đại học Bách khoa Hà Nội, viện Công nghệ thông tin và Truyền thông, bộ môn Khoa học máy tính đã có môi trường học tập tốt nhất để giúp tôi có kiến thức bổ ích và những kinh nghiệm quý báu trong suốt quá trình học tập và rèn luyện.
+
+Đặc biệt tôi xin gửi lời cảm ơn sâu sắc nhất tới cô TS. Nguyễn Thị Thu Trang – Giảng viên bộ môn Công nghệ phần mềm và thầy ThS. Đỗ Tuấn Anh - Giảng viên bộ môn Khoa học máy tính, viện Công nghệ thông tin và Truyền thông, trường Đại học Bách khoa Hà Nội đã tận tình hướng dẫn tôi trong quá trình làm đồ án tốt nghiệp. Thầy cô dẫn dắt tôi không chỉ bằng kiến thức mà còn cả sự kiên trì và niềm đam mê. Tôi cảm thấy thật sự may mắn khi được học và phát triển dưới sự hướng dẫn của thầy cô.
+
+Tôi xin gửi lời cảm ơn đến các đồng nghiệp của tôi tại VNG, họ đã đóng góp một phần thời gian, nguồn lực và kinh nghiệm của mình để giúp tôi hoàn thành đồ án này.
+
+Cuối cùng, tôi xin chân thành cảm ơn gia đình, bạn bè, các bạn làm cùng nhóm đồ án tốt nghiệp đã luôn động viên, hỗ trợ và tạo những điều kiện tốt nhất để tôi có thể hoàn thành đồ án tốt nghiệp này.
+
+Tuy nhiên, do thời gian và kiến thức của tôi cũng còn nhiều hạn chế nên chắc chắn không tránh khỏi những thiếu sót vì vậy tôi rất mong nhận được sự đóng góp ý kiến của các thầy giáo, cô giáo và toàn thể các bạn đọc.
+
+Tôi xin chân thành cảm ơn!
+
 \newpage
 
 \chapter*{\centering Tóm tắt}
 \addcontentsline{toc}{chapter}{Tóm tắt}
-Xác minh người nói là quá trình tự động xác nhận danh tính một người bằng việc sử dụng thông tin riêng biệt của người nói có trong tín hiệu âm thanh. Với việc an ninh và bảo mật trên không gian mạng ngày càng được quan tâm, xác minh người nói trở thành một lĩnh vực nghiên cứu quan trọng. Trong tiếng Việt, lượng dữ liệu có nhãn người nói còn rất hạn chế so với tiếng Anh. Đồ án tập trung vào xây dựng bộ dữ liệu phục vụ cho bài toán xác minh người nói tiếng Việt cũng như nghiên cứu và cải tiến mô hình học sâu cho bài toán.
+Xác minh người nói (Speaker Verification) là quá trình tự động xác nhận danh tính một người bằng việc sử dụng thông tin độc nhất của người nói có trong tín hiệu giọng nói. Hiện nay, xác định danh tính một cá nhân cần kết hợp nhiều yếu tố như mật khẩu, mống mắt, khuôn mặt, ... nhằm tăng cường tính bảo mật. Trên thế giới, phương pháp học sâu đang được ưa chuộng cho xác minh người nói với hiệu suất cao. Trong tiếng Việt, so với các ngôn ngữ khác, lượng dữ liệu huấn luyện còn rất hạn chế chưa đủ để xây dựng mô hình chất tượng tốt cho bài toán xác minh người nói. Vì vậy, đồ án tập trung vào xây dựng mô hình học sâu và bộ dữ liệu cho bài toán xác minh người nói tiếng Việt.
 
-Để xây dựng dữ liệu cho bài toán, đồ án kết hợp sử dụng ba bộ dữ liệu ZaloAI, VIVOS và VLSP, trong đó VIVOS và VLSP bắt nguồn từ bài toán nhận dạng giọng nói. Lỗi trong các bộ dữ liệu được loại bỏ sử dụng đặc trưng từ mô hình học sâu. Về phía mô hình, để giải quyết vấn đề thiếu hụt dữ liệu, đồ án nghiên cứu và sử dụng phương pháp học chuyển tiếp (transfer learning) từ mô hình tiếng Anh sang tiếng Việt. Đồ án sử dụng phương thức tối ưu SGD với tính khái quát hoá tốt thay cho Adam trong mô hình cơ sở. Cùng với đó, đồ án cải tiến hàm mất mát nguyên mẫu góc (Angular Prototypical - AP)\cite{chung2020defence} bằng cách thêm hệ số phạt lề nhằm tăng tính phân tách người nói của mô hình. Kết quả đánh giá cho thấy mô hình đề xuất đạt tỉ lệ lỗi bằng nhau (Equal Error Rate - EER) 2.698\% vượt trội so với 5.860\% của mô hình cơ sở cho bài toán xác minh người nói tiếng Việt.
+Đồ án nghiên cứu và sử dụng phương pháp học chuyển tiếp (Transfer Learning) nhằm sử dụng kiến thức học được của mô hình tiếng Anh cho tiếng Việt. Đồ án cũng sử dụng phương thức tối ưu SGD với tính khái quát hoá tốt thay cho Adam trong mô hình cơ sở. Cùng với đó, đồ án cải tiến hàm mất mát nguyên mẫu góc (Angular Prototypical - AP) bằng cách thêm hệ số phạt biên nhằm tăng tính phân tách người nói của mô hình. Kết quả đánh giá cho thấy mô hình đề xuất đạt tỉ lệ lỗi bằng nhau (Equal Error Rate - EER) 3.115\% vượt trội so với 7.602\% của mô hình cơ sở cho bài toán xác minh người nói tiếng Việt. Để xây dựng dữ liệu cho bài toán, đồ án kết hợp sử dụng các bộ dữ liệu ZaloAI, VIVOS, VLSP và CommonVoice. Lỗi trong các bộ dữ liệu được loại bỏ bằng cách phân tích ma trận tương đồng của biểu diễn các câu nói.
+
+Kết quả của đồ án đã được tổng hợp và nộp tại Hội nghị Châu Á Thái Bình Dương về Ngôn ngữ, Thông tin và Tính toán (PACLIC) với tiêu đề "Speaker Verification Model with Angular Margin Prototypical Loss for Low-Resource Languages and Vietnamese Datasets".
 
 Trong tương lai, đồ án sẽ thu thập thêm dữ liệu người nói từ nguồn Youtube và triển khai ứng dụng hoặc API xác minh người nói. Ngoài ra, đồ án sẽ đưa nhóm người có giọng nói tương tự vào cùng một mini-batch để huấn luyện mô hình có tính phân tách cao hơn. 
 
@@ -272,9 +324,16 @@ Trong tương lai, đồ án sẽ thu thập thêm dữ liệu người nói t�
 \subfile{results.tex}
 
 \chapter{Kết luận và hướng phát triển}
-Trong đồ án này, tác giả đã nghiên cứu việc áp dụng học sâu để giải quyết bài toán nhận dạng người nói không phụ thuộc văn bản. Đồ án tổng hợp và loại bỏ dữ liệu lỗi từ 3 nguồn ZaloAI, VIVOS và VLSP, cùng với kết hợp phương pháp học chuyển tiếp để giải quyết vấn đề thiếu hụt dữ liệu trong tiếng Việt. Nhận thấy dữ liệu còn nhiều tạp âm, đồ án thử nghiệm huấn luyện mô hình với dữ liệu khử tạp âm giúp cải thiện 0.560\% EER so với mô hình huấn luyện trên bộ dữ liệu còn tạp âm. Thử nghiệm phương pháp tối ưu cho thấy SGD giúp mô hình khái quát hoá tốt hơn trên tập dữ liệu so với Adam. Để giải quyết vấn đề biên quyết định yếu của hàm softmax trong hàm mất mát AP, tác giả đề xuất đưa hệ số phạt lề vào hàm AP theo hai cách khác nhau có tên là AMP-cos và AMP-arc. Qua phân tích phân bố điểm tương đồng, AMP-arc cho hiệu rõ rệt so với hàm AP trong việc phân tách phổ điểm. Mô hình cuối cùng sử dụng các phương pháp đề xuất đạt kết quả 2.698\% EER đạt kết quả vượt trội so với mô hình cơ sở với 5.860\% EER.
+\section{Kết luận}
+Trong đồ án này, tác giả đã xây dựng bộ dữ liệu xác minh người nói tiếng Việt - VietSV bằng cách tổng hợp từ các nguồn ZaloAI, VIVOS, VLSP và CommonVoice. Dữ liệu tổng hợp được làm sạch bằng việc loại bỏ các người nói không hợp lệ, loại bỏ câu nói không hợp lệ và hợp nhất người nói có cùng danh tính. Bộ dữ liệu đầu ra được phân thành ba tập: tập huấn luyện, tập kiểm tra 1 và tập kiểm tra 2. Trong đó các tập kiểm tra, các cặp câu được lấy mẫu từ người nói có cùng giới tính và vùng miền nhằm tăng độ khó. 
 
-Tuy mô hình hiện tại đạt kết quả khả quan, vẫn còn một số thành phần cần phát triển thêm. Hiện tại, việc chọn người nói trong một mini-batch là hoàn toàn ngẫu nhiên, tính phân tách của mô hình có thể được cải thiện nếu có cơ chế đưa nhóm người khó phân biệt vào cùng một mini-batch. Ngoài ra, điểm tương đồng sau khi dự đoán của mô hình cũng có thể được chuẩn hoá dựa trên biểu diễn của một nhóm người đa dạng vùng miền giới tính, từ đó tăng khả năng phân biệt. Miền dữ liệu cũng là một vấn đề với mô hình; trong tương lai, tác giả sẽ thử nghiệm phương pháp học đối kháng để giảm ảnh hưởng của miền dữ liệu (tạp âm, các thiết bị thu âm khác nhau, ...) đối với biểu diễn người nói.
+Đồ án đã đề xuất mô hình sử dụng phương pháp học chuyển tiếp với mong muốn tận dụng kiến thức của mô hình huấn luyện trên dữ liệu tiếng Anh để bổ trợ cho tiếng Việt. Nhận thấy dữ liệu còn nhiều tạp âm, đồ án thử nghiệm huấn luyện mô hình với dữ liệu khử tạp âm giúp cải thiện 0.444\% EER so với mô hình huấn luyện trên bộ dữ liệu còn tạp âm. Thử nghiệm phương pháp tối ưu cho thấy SGD giúp mô hình khái quát hoá tốt hơn trên tập dữ liệu so với Adam. Vấn đề biên quyết định yếu của hàm softmax được khắc phục bằng cách đưa hệ số phạt biên vào hàm AP theo hai cách khác nhau gọi là AMP-cos và AMP-arc. Qua phân tích phân bố điểm tương đồng, AMP-arc cho hiệu quả rõ rệt so với hàm AP trong việc phân tách phổ điểm. Mô hình đề xuất với các cải tiến nói trên đạt kết quả 3.115\% EER vượt trội so với mô hình cơ sở với kết quả 7.602\% EER.
+
+Kết quả của đồ án đã được tổng hợp và nộp tại Hội nghị Châu Á Thái Bình Dương về Ngôn ngữ, Thông tin và Tính toán (PACLIC) với tiêu đề "Speaker Verification Model with Angular Margin Prototypical Loss for Low-Resource Languages and Vietnamese Datasets".
+
+\section{Hướng phát triển}
+
+Trong tương lai, để cải thiện chất lượng mô hình đồ án sẽ thu thập thêm dữ liệu người nói từ nguồn Youtube. Ngoài ra, đồ án sẽ đưa nhóm người có giọng nói tương tự vào cùng một mini-batch để huấn luyện mô hình có tính phân tách cao hơn. Hơn nữa, điểm tương đồng sau khi dự đoán của mô hình cũng có thể được chuẩn hoá dựa trên biểu diễn của một nhóm người đa dạng vùng miền giới tính, từ đó tăng khả năng phân biệt. Hiện tại, miền dữ liệu cũng là một vấn đề với mô hình; trong tương lai, tác giả sẽ thử nghiệm phương pháp học đối kháng để giảm ảnh hưởng của miền dữ liệu (tạp âm, các thiết bị thu âm khác nhau, ...) đối với biểu diễn người nói.
 
 \pagebreak
 % \bibliographystyle{plain}
